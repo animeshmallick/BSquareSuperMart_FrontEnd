@@ -23,7 +23,7 @@ $categories = $api->getAllCategories();
             <p class="text-muted fadeIn" id="address" data-bs-toggle="modal" data-bs-target="#addressModal">HOME - Flat No 2A 009 ▼</p>
         </div>
         <div>
-            <img src="user-icon.png" alt="User" class="rounded-circle wow fadeIn" width="40">
+            <img src="../images/user-icon.png" alt="User" class="rounded-circle wow fadeIn" width="10">
         </div>
     </div>
     <div class="mt-3">
@@ -37,8 +37,12 @@ $categories = $api->getAllCategories();
     <div class='row'>
         <?php foreach ($items as $item): ?>
         <div class='col-4 text-center wow zoomIn category-item'>
-            <img src='<?= $item["image"] ?>' width='80'>
-            <p><?= $item["name"] ?></p>
+            <div class="category-img-container">
+                <img src='<?= "../images/".$item['image']; ?>' class="category-img" width='100' alt="<?= $item["name"] ?>">
+                <div class="category-overlay">
+                    <p class="category-name"><?= $item["name"] ?></p>
+                </div>
+            </div>
         </div>
         <?php endforeach; ?>
     </div>
