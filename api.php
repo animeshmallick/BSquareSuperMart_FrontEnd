@@ -16,7 +16,6 @@ class api
      * @throws Exception
      */
     public function getAllCategories(){
-        $url =
         $ch = curl_init($this->get_end_point() . "/categories");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
