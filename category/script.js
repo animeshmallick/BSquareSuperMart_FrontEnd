@@ -32,7 +32,6 @@ function displaySidebar(products) {
     subcategories.forEach(subcategory => {
         const item = document.createElement('div');
         item.classList.add('sidebar-item');
-        item.setAttribute('data-category', subcategory);
         item.innerHTML = `<img src="https://via.placeholder.com/30" alt="${subcategory}"> <h6>${subcategory}</h6>`;
         sidebarList.appendChild(item);
 
@@ -51,5 +50,4 @@ fetch("http://localhost:7777/category/"+sub_category_param)
         displaySidebar(products);
         displayProducts(products, Object.keys(products)[0]);
     })
-    .catch(err => console.log(err))
-    .catch(err => console.error("CORS error?", err));
+    .catch(err => console.log(err));
