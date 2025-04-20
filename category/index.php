@@ -13,17 +13,16 @@
 <body>
 <div>
     <div class="delivery_header"><h4>Delivery in 7 minutes</h4></div>
- <div class="wrapper">
-
-    <div class="sidebar" id="sidebarList">
-        <!-- Dynamic sidebar population  -->
-    </div>
-    <div class="content" id="content">
-        <div class="row" id="productList">
-            <!-- Dynamic products will be injected here -->
+     <div class="wrapper">
+        <div class="sidebar" id="sidebarList">
+            <!-- Dynamic sidebar population  -->
         </div>
-    </div>
- </div>
+        <div class="content" id="content">
+            <div class="row" id="productList">
+                <!-- Dynamic products will be injected here -->
+            </div>
+        </div>
+     </div>
 </div>
 
 <div class="cart-bar">
