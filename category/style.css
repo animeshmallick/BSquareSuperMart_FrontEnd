@@ -17,7 +17,7 @@ body {
     max-width: 20%;
     background-color: #fff;
     border-right: 1px solid #dee2e6;
-    padding: 1rem 0.5rem;
+    padding: 0.5rem 0.5rem;
     overflow-y: auto;
 }
 
@@ -41,10 +41,15 @@ body {
     margin-bottom: 8px;
 }
 
+div.productList.row {
+    flex: 1;
+    padding: 0.5rem 0.5rem;
+    max-width: 80%;
+}
 .content {
     flex: 1;
     padding: 0.1rem;
-    overflow-y: auto;
+    max-width: 80%;
 }
 
 .square-tile {
@@ -94,6 +99,14 @@ div.delivery_header {
     box-shadow: 0 -0.1rem 2rem rgba(0, 0, 0, 0.1);
 }
 .btn {
+    background-color: #1f6338;
+    color: #fffefe;
+}
+.decrementBtn {
+    background-color: #1f6338;
+    color: #fffefe;
+}
+.incrementBtn {
     background-color: #1f6338;
     color: #fffefe;
 }
