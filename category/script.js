@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateItemsCountInFooter();
         })
         .catch(err => console.log(err));
-})
+});
 function displayProductList(products, product_subcategory) {
     const productList = document.getElementById('productList');
     const eligibleProducts = products[product_subcategory] && products[product_subcategory].length > 0 ?
@@ -31,7 +31,7 @@ function displayProductList(products, product_subcategory) {
                     </div>
                 </div>
                 <div>
-                    <h5>${product.productName}</h5>
+                    <h5 class="productDescription">${product.productName}</h5>
                 </div>
             `;
             productList.appendChild(listItem);
@@ -40,65 +40,6 @@ function displayProductList(products, product_subcategory) {
     }
 }
 
-function addProductQuantityContainer(productId) {
-    const productQuantityInCart = getProductCartQuantity(productId);
-    if(productQuantityInCart === 0){
-        const button = document.createElement('button');
-        button.classList.add('btn');
-        button.innerText = 'Add Product';
-        button.onclick = () => addProduct(productId);
-
-        const addProductButton = document.getElementById("addProduct_"+productId);
-        addProductButton.innerHTML = "";
-        addProductButton.appendChild(button);
-    }else{
-        const updateProductQuantity = document.createElement('div');
-        updateProductQuantity.classList.add('productCounter');
-
-        const decrementBtn = document.createElement('button');
-        decrementBtn.classList.add('decrementBtn');
-        decrementBtn.textContent = '-';
-        decrementBtn.onclick = () => decrementProductQuantityInCart(productId);
-
-        const productQuantitySpan = document.createElement('span');
-        productQuantitySpan.textContent = (productQuantityInCart).toString();
-
-        const incrementBtn = document.createElement('button');
-        incrementBtn.classList.add('incrementBtn');
-        incrementBtn.textContent = '+';
-        incrementBtn.onclick = () => incrementProductQuantityInCart(productId);
-
-        updateProductQuantity.appendChild(decrementBtn);
-        updateProductQuantity.appendChild(productQuantitySpan);
-        updateProductQuantity.appendChild(incrementBtn);
-
-        const addProductButton = document.getElementById("addProduct_"+productId);
-        addProductButton.innerHTML = "";
-        addProductButton.appendChild(updateProductQuantity);
-    }
-}
-function getProductCartQuantity(productId) {
-    try {
-        const cart = JSON.parse(localStorage.getItem('cart'));
-        for (let i = 0; i < cart.length; i++) {
-            const item = cart[i];
-            if (item.ProductID === productId) {
-                //Product_ID exists in 'cart'. Return the respective product quantity.
-                return item.Quantity;
-            }
-        }
-        //Product_ID does not exist in 'cart'. Return '0'
-        return 0;
-    } catch (Err) {
-        //'cart' does not exist in localstorage.
-        return 0;
-    }
-}
-
-// function refreshAddProductButton(productQuantityInCart,productId,index) {
-//     document.getElementById('addProduct_'+index).innerHTML = ``;
-//     addProductButton(productQuantityInCart,productId,index);
-// }
 function displaySidebar(products) {
     const sidebarList = document.getElementById('sidebarList');
     const subcategories = Object.keys(products);
