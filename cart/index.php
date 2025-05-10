@@ -6,6 +6,7 @@
     <title>My Cart</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    <script src="../Config.js"></script>
     <script src="script.js"></script>
 </head>
 <body>

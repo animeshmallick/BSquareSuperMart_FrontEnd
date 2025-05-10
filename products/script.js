@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function(){
     if (param_value !== null) {
     const productID = Number(param_value);
         if (productID > 0 && !isNaN(productID)) {
-            fetch("http://localhost:7777/product/" + productID)
+            fetch(BACKEND_URI + "/product/" + productID)
                 .then(response => response.json())
                 .then(product => {
                     displayProduct(product);
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     addProductQuantityContainer(product[0].productId);
                 })
                 .then(() => {
-                    fetch("http://localhost:7777/similarProducts/" + productID)
+                    fetch(BACKEND_URI + "/similarProducts/" + productID)
                         .then(response => response.json())
                         .then(similarProducts => {
                             displaySimilarProducts(similarProducts);

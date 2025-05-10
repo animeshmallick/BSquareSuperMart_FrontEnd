@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Page</title>
     <link href="../styles.css" rel="stylesheet"/>
+    <script src="../Config.js"></script>
     <script src="script.js"></script>
     <script src="../scripts.js"></script>
 </head>

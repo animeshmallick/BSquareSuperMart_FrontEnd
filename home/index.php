@@ -1,8 +1,3 @@
-<?php
-include '../api.php';
-$api = new API();
-$categories = $api->getAllCategories();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +6,13 @@ $categories = $api->getAllCategories();
     <title>BSquareSuperMart Home</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="../Config.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
-<body>
+<body onload="fill_categories()">
 <div class="container-fluid p-3" style="background: linear-gradient(to bottom, #FFD700, #FFF);">
     <div class="d-flex justify-content-between align-items-center">
         <div>
@@ -32,21 +29,6 @@ $categories = $api->getAllCategories();
 </div>
 
 <div class="container mt-3" id="categories">
-    <?php foreach ($categories as $category => $items): ?>
-    <h5 class='category-title wow fadeInLeft'><?= $category ?></h5>
-    <div class='row'>
-        <?php foreach ($items as $item): ?>
-        <div class='col-4 text-center wow zoomIn category-item'>
-            <div class="category-img-container">
-                <img src='<?= "../images/".$item['image']; ?>' class="category-img" width='100' alt="<?= $item["name"] ?>">
-                <div class="category-overlay">
-                    <p class="category-name"><?= $item["name"] ?></p>
-                </div>
-            </div>
-        </div>
-        <?php endforeach; ?>
-    </div>
-    <?php endforeach; ?>
 </div>
 
 <!-- Address Selection Modal -->

@@ -6,6 +6,7 @@
     <title>Product Category</title>
     <link href="style.css" rel="stylesheet"/>
     <link href="../styles.css" rel="stylesheet"/>
+    <script src="../Config.js"></script>
     <script src="script.js"></script>
     <script src="../scripts.js"></script>
 </head>

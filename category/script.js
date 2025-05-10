@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const sub_category_param = new URLSearchParams(window.location.search).get("category");
-    fetch("http://localhost:7777/category/"+sub_category_param)
+    fetch(BACKEND_URI + "/category/"+sub_category_param)
         .then(response => response.json())
         .then(products => {
             displaySidebar(products);

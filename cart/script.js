@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log(JSON.parse(localStorage.getItem('cart')));
-    fetch("http://localhost:7777/cart",
+    fetch(BACKEND_URI + "/cart",
         {method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: localStorage.getItem('cart')

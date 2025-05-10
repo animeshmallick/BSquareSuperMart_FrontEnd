@@ -6,7 +6,7 @@ function addProductToDB() {
             inputs.forEach(input => {
                 productJson[input.name] = input.value;
             });
-            fetch("http://localhost:7777/AddNewProductToDatabase",
+            fetch(BACKEND_URI + "/AddNewProductToDatabase",
                 {method: "POST",
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(productJson)
