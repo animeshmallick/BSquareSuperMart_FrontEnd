@@ -73,7 +73,7 @@
         </div>
     </form>
     <script>
-        document.getElementById("productForm").action = "http://localhost:7777/addNewProductToDatabase/"
+        document.getElementById("productForm").action = `http://${BACKEND_IP}:7777/addNewProductToDatabase/`
     </script>
 </div>
 </body>
