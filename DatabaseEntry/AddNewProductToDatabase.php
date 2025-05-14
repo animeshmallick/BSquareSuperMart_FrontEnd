@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="form-container" id="addNewProductToDatabase">
-    <form id="productForm" onsubmit="return addProductToDB()">
+    <form id="productForm" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Product Name</label>
             <input type="text" name="name" required>
@@ -56,10 +56,6 @@
             <textarea name="description" rows="4" required></textarea>
         </div>
         <div class="form-group">
-            <label for="image_url">Image URL</label>
-            <input type="text" name="image_url">
-        </div>
-        <div class="form-group">
             <label for="expiration_date">Expiration Date</label>
             <input type="date" name="expiration_date" required>
         </div>
@@ -71,10 +67,14 @@
             <label for="tags">Tags (comma separated)</label>
             <input type="text" name="tags" required>
         </div>
+        <input type="file" name="images" accept="image/*" multiple required />
         <div style="text-align:center;">
             <button type="submit" id="AddNewProductToDatabaseBtn">Add Product</button>
         </div>
     </form>
+    <script>
+        document.getElementById("productForm").action = "http://localhost:7777/addNewProductToDatabase/"
+    </script>
 </div>
 </body>
 </html>
