@@ -1,8 +1,6 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
 class ApiBuilder {
     private String $protocol;
     private String $hostname;
@@ -14,6 +12,10 @@ class ApiBuilder {
     private $requestBody;
     private $responseData;
     private int $statusCode;
+    public function __construct(){
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+        $dotenv->load();
+    }
     function init(): ApiBuilder
     {
         $this->protocol = $_ENV['BACKEND_PROTOCOL'];
