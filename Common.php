@@ -7,11 +7,12 @@ class ApiBuilder {
     private int $port;
     private String $path;
     private String $method;
-    private $queryParams;
-    private $headers;
-    private $requestBody;
-    private $responseData;
+    private array $queryParams;
+    private array $headers;
+    private array $requestBody;
+    private object $responseData;
     private int $statusCode;
+    private String $url;
     public function __construct(){
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
         $dotenv->load();
@@ -69,27 +70,11 @@ class ApiBuilder {
     }
     function execute(): ApiBuilder
     {
-        $url = $this->protocol . "://" . $this->hostname . ":" . $this->port . $this->path;
-        if ($this->method == "GET") {
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $response = curl_exec($ch);
-            $this->responseData = (object) json_decode($response);
-            $this->statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
-        }
-        if ($this->method == "POST") {
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->requestBody));
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
-            $response = curl_exec($ch);
-            $this->responseData = (object) json_decode($response);
-            $this->statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
-        }
+        $curl_cmd = $this->prepareCurlCommand();
+        $response = curl_exec($curl_cmd);
+        $this->responseData = (object) json_decode($response);
+        $this->statusCode = curl_getinfo($curl_cmd, CURLINFO_HTTP_CODE);
+        curl_close($curl_cmd);
         return $this;
     }
     function getResponse(): object
@@ -99,5 +84,44 @@ class ApiBuilder {
     function getStatusCode(): int
     {
         return $this->statusCode;
+    }
+
+    private function prepareCurlCommand(): CurlHandle|bool
+    {
+        $this->url = $this->protocol . "://" . $this->hostname . ":" . $this->port . $this->path;
+        if (strtoupper($this->method) == "GET") {return $this->prepareGetCall();}
+        if (strtoupper($this->method) == "POST") {return $this->preparePostCall();}
+        return false;
+    }
+    private function prepareGetCall(): CurlHandle|bool
+    {
+        $url_with_query_params = $this->url;
+        if (!empty($this->queryParams)) {
+            $url_with_query_params .= '?' . http_build_query($this->queryParams);
+        }
+        $ch = curl_init($url_with_query_params);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        return $ch;
+    }
+    private function preparePostCall(): CurlHandle|bool
+    {
+        $body = json_encode($this->requestBody);
+        $hasContentType = false;
+        foreach ($this->headers as $header) {
+            if (stripos($header, 'Content-Type:') === 0) {
+                $hasContentType = true;
+                break;
+            }
+        }
+        if (!$hasContentType) {
+            $this->headers[] = 'Content-Type: application/json';
+        }
+        $ch = curl_init($this->url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
+        return $ch;
     }
 }
