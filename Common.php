@@ -72,8 +72,12 @@ class ApiBuilder {
     {
         $curl_cmd = $this->prepareCurlCommand();
         $response = curl_exec($curl_cmd);
-        $this->responseData = (object) json_decode($response);
-        $this->statusCode = curl_getinfo($curl_cmd, CURLINFO_HTTP_CODE);
+        if ($response === false){
+            $this->responseData = (object) ["message" => "Curl Error", "error" => curl_error($curl_cmd)];
+        }else {
+            $this->responseData = (object)json_decode($response);
+            $this->statusCode = curl_getinfo($curl_cmd, CURLINFO_HTTP_CODE);
+        }
         curl_close($curl_cmd);
         return $this;
     }
