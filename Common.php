@@ -54,7 +54,11 @@ class ApiBuilder {
     }
     function setHeaders($headers): ApiBuilder
     {
-        $this->headers = $headers;
+        $formattedHeaders = [];
+        foreach ($headers as $key => $value) {
+            $formattedHeaders[] = "$key: $value";
+        }
+        $this->headers = $formattedHeaders;
         return $this;
     }
     function setRequestBody($requestBody):ApiBuilder{
@@ -78,6 +82,7 @@ class ApiBuilder {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->requestBody));
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
             $response = curl_exec($ch);
             $this->responseData = (object) json_decode($response);
             $this->statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -85,8 +90,9 @@ class ApiBuilder {
         }
         return $this;
     }
-    function getResponse(){
-        return $this->responseData;
+    function getResponse(): object
+    {
+        return (object) $this->responseData;
     }
     function getStatusCode(): int
     {
