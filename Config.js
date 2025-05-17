@@ -1,5 +1,5 @@
 const CONFIG = {
-    BACKEND_ENV: "LOCAL", //"PROD" for Production backend and "local" for local backend
+    BACKEND_ENV: "PROD", //"PROD" for Production backend and "local" for local backend
 
 
     BACKEND_PROTOCOL: "http",

@@ -42,14 +42,14 @@ $all_categories = $api->getResponse();
         <h5 class="category-title wow fadeInLeft"><?= $categoryHeader ?></h5>
         <div class="row">
             <?php foreach ($categories as $category) { ?>
-                <div class="col-4 text-center wow zoomIn category-item">
-                    <div class="category-img-container">
-                        <img class="category-img" width="100%" alt="<?= $category->name ?>">
-                    </div>
-                    <div class="category-overlay">
-                        <p class="category-name"><?= $category->name ?></p>
-                    </div>
-                </div>
+                    <a href="../category/index.php?category=<?= rawurlencode($category->name) ?>" class="text-decoration-none text-dark col-4">
+                        <div class="text-center wow zoomIn category-item">
+                            <div class="category-img-container">
+                                <img class="category-img" width="100%" alt="<?= $category->name ?>">
+                                <div class="category-name"><?= $category->name ?></div>
+                            </div>
+                        </div>
+                    </a>
             <?php } ?>
         </div>
     <?php } ?>
