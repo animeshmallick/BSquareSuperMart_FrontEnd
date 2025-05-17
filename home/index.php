@@ -1,3 +1,11 @@
+<?php
+include "../Common.php";
+$api = (new ApiBuilder())->init()
+    ->setMethod("GET")
+    ->setPath('/categories')
+    ->execute();
+$all_categories = $api->getResponse();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
-<body onload="fill_categories()">
+<body>
 <div class="container-fluid p-3" style="background: linear-gradient(to bottom, #FFD700, #FFF);">
     <div class="d-flex justify-content-between align-items-center">
         <div>
@@ -29,6 +37,21 @@
 </div>
 
 <div class="container mt-3" id="categories">
+    <?php foreach ($all_categories as $categoryHeader => $categories){ ?>
+        <h5 class="category-title wow fadeInLeft"><?= $categoryHeader ?></h5>
+        <div class="row">
+            <?php foreach ($categories as $category) { ?>
+                <div class="col-4 text-center wow zoomIn category-item">
+                    <div class="category-img-container">
+                        <img class="category-img" width="100%" alt="<?= $category->name ?>">
+                    </div>
+                    <div class="category-overlay">
+                        <p class="category-name"><?= $category->name ?></p>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
 </div>
 
 <!-- Address Selection Modal -->
