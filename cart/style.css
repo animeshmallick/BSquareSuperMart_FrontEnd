@@ -149,6 +149,15 @@ div.seperator {
     font-weight: 600;
     cursor: pointer;
 }
+.login-btn {
+    padding: 1rem 1rem;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
 div.checkout-summary {
 
 }

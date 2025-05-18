@@ -1,5 +1,5 @@
 <?php
-include "../Common.php";
+include "../ApiBuilder.php";
 $api = (new ApiBuilder())->init()
     ->setMethod(METHOD::GET)
     ->setPath('/categories')

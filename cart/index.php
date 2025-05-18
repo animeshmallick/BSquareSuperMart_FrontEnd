@@ -10,6 +10,7 @@
     <script src="script.js"></script>
 </head>
 <?php
+session_start();
 if($_SERVER['REQUEST_METHOD'] === "GET"){ ?>
     <body onload="redirectCartWithPostCall()"></body>
 <?php }else{
@@ -17,7 +18,9 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){ ?>
         echo "No cart data received";
         exit;
     }
+    include "../ApiBuilder.php";
     include "../Common.php";
+    $common = new Common();
     if($_POST['cart'] == null){
         $cart = [];
     }else {
@@ -90,26 +93,35 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){ ?>
                     Orders cannot be cancelled once packed for delivery. In case of unexpected delays, a refund will be provided, if applicable.
                 </div>
 
-                <div class="checkout-summary">
-                    <div class="address-section">
-                        <div>
-                            <strong>Delivering to Home</strong>
-                            <div>Flat No 2A 009 Shilphitha Splendour</div>
+                <?php if(isset($_SESSION['customer_id']) && $common->is_user_logged_in($_SESSION['customer_id'])){ ?>
+
+                    <div class="checkout-summary">
+                        <div class="address-section">
+                            <div>
+                                <strong>Delivering to Home</strong>
+                                <div>Flat No 2A 009 Shilphitha Splendour</div>
+                            </div>
+                            <div style="color: #28a745; font-weight: 600; cursor: pointer;">Change</div>
                         </div>
-                        <div style="color: #28a745; font-weight: 600; cursor: pointer;">Change</div>
-                    </div>
 
-                    <div class="payment-section">
-                        <div><strong>Pay Using UPI upon delivery</strong></div>
-                        <div style="color: #28a745; font-weight: 600; cursor: pointer;">Change</div>
-                    </div>
+                        <div class="payment-section">
+                            <div><strong>Pay Using UPI upon delivery</strong></div>
+                            <div style="color: #28a745; font-weight: 600; cursor: pointer;">Change</div>
+                        </div>
 
-                    <div class="pay-section">
-                        <div><span class="cart-total" id="cart_total">₹<?= $cart->bill->total_bill ?></span>&nbsp;&nbsp;TOTAL</div>
-                        <button class="pay-btn">Place Order
-                        </button>
+                        <div class="pay-section">
+                            <div><span class="cart-total" id="cart_total">₹<?= $cart->bill->total_bill ?></span>&nbsp;&nbsp;TOTAL</div>
+                            <button class="pay-btn">Place Order</button>
+                        </div>
                     </div>
-                </div>
+            <?php } else { ?>
+                    <div class="checkout-summary">
+                        <div class="pay-section">
+                            <div><span class="cart-total" id="cart_total">₹<?= $cart->bill->total_bill ?></span>&nbsp;&nbsp;TOTAL</div>
+                            <button class="login-btn">Login To Proceed</button>
+                        </div>
+                    </div>
+            <?php } ?>
             </div>
         <?php } ?>
     </body>
