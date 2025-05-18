@@ -51,9 +51,9 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){ ?>
                     <div class="delivery-section">
                         <p>Delivery in 13 minutes</p>
                         <p>|</p>
-                        <p>Shipment of 1 item</p>
+                        <p>Shipment of <?= count($cart->products) ?> item</p>
                     </div>
-                    <?php foreach ($cart as $product) { ?>
+                    <?php foreach ($cart->products as $product) { ?>
                         <div class="item-box">
                             <img src="<?= $product->img ?>" alt="ProductImage" />
                             <div class="item-details">
@@ -71,12 +71,18 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){ ?>
                 </div>
 
                 <div class="bill-section">
-                    <div class="bill-line"><span>Items total</span><span>₹50</span></div>
-                    <div class="bill-line"><span>Delivery charge</span><span>₹30</span></div>
-                    <div class="bill-line"><span>Handling charge</span><span>₹9</span></div>
-                    <div class="bill-line"><span>Small cart charge</span><span>₹20</span></div>
+                    <div class="bill-line"><span>Items total</span><span>₹<?= $cart->bill->cart_items_total ?></span></div>
+                    <div class="bill-line"><span>Delivery charge</span><span>₹<?= $cart->bill->delivery_fee ?></span></div>
+                    <div class="bill-line"><span>Packaging charge</span><span>₹<?= $cart->bill->packaging_fee ?></span></div>
+                    <div class="bill-line"><span>Platform charge</span><span>₹<?= $cart->bill->platform_fee ?></span></div>
+                    <?php if(isset($cart->bill->small_cart_fee)){ ?>
+                        <div class="bill-line"><span>Small cart charge</span><span>₹<?= $cart->bill->small_cart_fee ?></span></div>
+                    <?php } ?>
+                    <?php if(isset($cart->bill->restricted_cart_fee)){ ?>
+                        <div class="bill-line"><span>Restricted cart charges</span><span>₹<?= $cart->bill->restricted_cart_fee ?></span></div>
+                    <?php } ?>
                     <div class="seperator"></div>
-                    <div class="total-bill-line"><span>Grand total</span><span>₹109</span></div>
+                    <div class="total-bill-line"><span>Grand total</span><span>₹<?= $cart->bill->total_bill ?></span></div>
                     <div class="seperator"></div>
                 </div>
 
@@ -99,7 +105,7 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){ ?>
                     </div>
 
                     <div class="pay-section">
-                        <div><span class="cart-total" id="cart_total">₹109</span>&nbsp;&nbsp;TOTAL</div>
+                        <div><span class="cart-total" id="cart_total">₹<?= $cart->bill->total_bill ?></span>&nbsp;&nbsp;TOTAL</div>
                         <button class="pay-btn">Place Order
                         </button>
                     </div>
