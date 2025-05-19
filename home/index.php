@@ -1,7 +1,8 @@
 <?php
+session_start();
 include "../ApiBuilder.php";
 $api = (new ApiBuilder())->init()
-    ->setMethod(METHOD::GET)
+    ->setMethod('GET')
     ->setPath('/categories')
     ->execute();
 $all_categories = $api->getResponse();

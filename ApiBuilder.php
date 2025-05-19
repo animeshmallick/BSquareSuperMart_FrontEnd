@@ -1,16 +1,12 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
-enum METHOD {
-    case GET;
-    case POST;
-}
 
 class ApiBuilder {
     private String $protocol;
     private String $hostname;
     private int $port;
     private String $path;
-    private METHOD $method;
+    private string $method;
     private array $queryParams;
     private array $headers;
     private array $requestBody;
@@ -97,8 +93,8 @@ class ApiBuilder {
     private function prepareCurlCommand(): CurlHandle|bool
     {
         $this->url = $this->protocol . "://" . $this->hostname . ":" . $this->port . $this->path;
-        if ($this->method == METHOD::GET) {return $this->prepareGetCall();}
-        if ($this->method == METHOD::POST) {return $this->preparePostCall();}
+        if ($this->method == 'GET') {return $this->prepareGetCall();}
+        if ($this->method == 'POST') {return $this->preparePostCall();}
         return false;
     }
     private function prepareGetCall(): CurlHandle|bool

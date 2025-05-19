@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    $redirect_to = $_GET['redirect'] ?? null;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,9 +20,9 @@
         <input type="tel" name="PHONE" id="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
         <label for="password">Password</label>
         <input type="password" name="PASSWORD" id="password" placeholder="Password" />
+        <input type="text" name="redirect" hidden="hidden" />
         <input type="submit" value="Login" />
     </form>
-
 </div>
 </body>
 </html>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +13,6 @@
     <script src="script.js"></script>
 </head>
 <?php
-session_start();
 if($_SERVER['REQUEST_METHOD'] === "GET"){ ?>
     <body onload="redirectCartWithPostCall()"></body>
 <?php }else{
@@ -33,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){ ?>
     }
     $api = (new ApiBuilder())
         ->init()
-        ->setMethod(METHOD::POST)
+        ->setMethod('POST')
         ->setPath("/cart")
         ->setRequestBody($cart)
         ->execute();
@@ -93,7 +95,7 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){ ?>
                     Orders cannot be cancelled once packed for delivery. In case of unexpected delays, a refund will be provided, if applicable.
                 </div>
 
-                <?php if(isset($_SESSION['customer_id']) && $common->is_user_logged_in($_SESSION['customer_id'])){ ?>
+                <?php if(isset($_SESSION['authToken']) && $common->is_user_logged_in($_SESSION['authToken'])){ ?>
 
                     <div class="checkout-summary">
                         <div class="address-section">
