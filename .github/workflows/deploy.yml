@@ -1,0 +1,35 @@
+name: Deploy to EC2 and start Apache and MySql Servers
+
+on:
+  push:
+    branches:
+      - mainline
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf "%s\n" "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to EC2 and restart APACHE and MYSQL
+        if: success()
+        env:
+          HOST: ${{ secrets.EC2_HOST }}
+          USER: ${{ secrets.EC2_USER }}
+        run: |
+          ssh $USER@$HOST << 'EOF'
+            cd /var/www/html/BSquareSuperMart
+            git config --global --add safe.directory /var/www/html/BSquareSuperMart
+            sudo git pull origin mainline
+            sudo systemctl restart httpd
+            sudo systemctl restart mysqld
+          EOF
