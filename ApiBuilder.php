@@ -37,7 +37,7 @@ class ApiBuilder {
             return $_ENV['BACKEND_PROD_IP'];
 
         if ($_ENV['BACKEND_ENV'] == 'QA')
-            return $_ENV['BACKEND_ENV'];
+            return $_ENV['BACKEND_QA_IP'];
 
         if ($_ENV['BACKEND_ENV'] == 'LOCAL')
             return $_ENV['BACKEND_LOCAL_IP'];
