@@ -120,7 +120,7 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){ ?>
                     <div class="checkout-summary">
                         <div class="pay-section">
                             <div><span class="cart-total" id="cart_total">₹<?= $cart->bill->total_bill ?></span>&nbsp;&nbsp;TOTAL</div>
-                            <button class="login-btn">Login To Proceed</button>
+                            <a href="../login/index.php?redirect=cart"><button class="login-btn">Login To Proceed</button></a>
                         </div>
                     </div>
             <?php } ?>

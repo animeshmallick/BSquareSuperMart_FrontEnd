@@ -20,7 +20,7 @@
         <input type="tel" name="PHONE" id="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
         <label for="password">Password</label>
         <input type="password" name="PASSWORD" id="password" placeholder="Password" />
-        <input type="text" name="redirect" hidden="hidden" />
+        <input type="text" name="redirect" value="<?= $redirect_to ?>" hidden="hidden" />
         <input type="submit" value="Login" />
     </form>
 </div>
