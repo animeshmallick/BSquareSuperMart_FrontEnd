@@ -19,6 +19,7 @@ if ($current_hour >= 4 && $current_hour < 12) {
     $greeting = 'Good Evening';
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
