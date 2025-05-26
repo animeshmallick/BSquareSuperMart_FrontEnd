@@ -12,11 +12,15 @@ $api = (new ApiBuilder())->init()
     ->setRequestBody($loginDetails)
     ->execute();
 $response = $api->getResponse();
-$_SESSION['authToken'] = $response->authToken;
-if ($redirect == null)
-    header("Location: ../home/");
-else
-    header("Location: ../" . $redirect . "/");
+if(isset($response->authToken)) {
+    $_SESSION['authToken'] = $response->authToken;
+    if ($redirect == null)
+        header("Location: ../home/");
+    else
+        header("Location: ../" . $redirect . "/");
+}else{
+    echo "Error Getting Auth Token from Server";
+}
 ?>
 
 
