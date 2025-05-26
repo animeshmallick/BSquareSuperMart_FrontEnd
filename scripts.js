@@ -1,4 +1,5 @@
 function addProduct(productId) {
+    event.stopPropagation();
     let cart = localStorage.getItem('cart');
 
     if (cart === null) {
@@ -68,6 +69,7 @@ function getProductCartQuantity(productId) {
 }
 
 function decrementProductQuantityInCart(productId){
+    event.stopPropagation();
     const cart = JSON.parse(localStorage.getItem('cart'));
     for(let i = 0; i < cart.length; i++) {
         const item = cart[i];
@@ -87,6 +89,7 @@ function decrementProductQuantityInCart(productId){
 }
 
 function incrementProductQuantityInCart(productId){
+    event.stopPropagation();
     const cart = JSON.parse(localStorage.getItem('cart'));
     for(let i = 0; i < cart.length; i++) {
         const item = cart[i];
@@ -101,7 +104,7 @@ function incrementProductQuantityInCart(productId){
 
 function updateProductQuantityContainer(productId){
     addProductQuantityContainer(productId);
-    updateItemsCountInFooter();
+    updateItemsCountInFooter(); //This updates the footer whenever,'cart' is changed
 }
 
 function updateItemsCountInFooter(){
@@ -112,27 +115,11 @@ function updateItemsCountInFooter(){
             cartItemsCount += item.Quantity;
         });
     }catch(Err){}
-    const cartSize = document.getElementById('cartItemsCount');
-    cartSize.innerText = cartItemsCount;
-}
-
-function displaySimilarProducts(similarProducts){
-    const similarProductsList = document.getElementById('similarProductsList');
-        similarProducts.forEach(product => {
-            const productTile = document.createElement('div');
-            productTile.classList.add('productTile');
-            productTile.innerHTML = `
-                <img src="${product.productImg}" alt="${product.productName}">
-                <div><b>${product.productName}</b></div>
-                <div>${product.productSize}</div>
-                <div style="display: flex; justify-content: space-between">
-                    <div>₹ ${product.productPrice}</div>
-                    <div id="addProduct_${product.productId}">
-                </div>  
-                </div>
-            `;
-            similarProductsList.appendChild(productTile);
-            addProductQuantityContainer(product.productId);
-
-        });
+    if (cartItemsCount !== 0){  //Display cart bar only if there are items added in the cart
+        const cartSize = document.getElementById('cartItemsCount');
+        document.getElementById('cartBar').style.display = "flex";
+        cartSize.innerText = cartItemsCount;
+    }else{  //If no items in cart then hide the cart bar
+        document.getElementById('cartBar').style.display = "none";
+    }
 }

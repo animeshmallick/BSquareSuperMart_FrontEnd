@@ -41,7 +41,7 @@ $subcategories = array_keys(get_object_vars($category_products));
             <div class="row" id="productList">
                 <?php foreach($category_products as $subcategory_products => $products){ ?>
                     <?php foreach($products as $product){ ?>
-                        <div class="product-outer-container" style="display: none" subcategory="<?= $subcategory_products ?>">
+                        <div class="product-outer-container" style="display: none" subcategory="<?= $subcategory_products ?>" productId="<?=$product->productId ?>" onclick="displayProduct()">
                             <div class="image-quantity">
                             <img src="<?= $product->productImg ?>" class="square-image" alt="<?= $product->productName ?>">
                                 <div>
@@ -65,10 +65,16 @@ $subcategories = array_keys(get_object_vars($category_products));
          </script>
      </div>
 </div>
-<div class="cart-bar">
+<div class="cart-bar" id="cartBar" style="display: none;">
     <div><span id="cartItemsCount"></span><span> items in cart</div>
     <a href="../cart" class="btn btn-primary">Go to Cart</a>
+    <script>updateItemsCountInFooter()</script>
 </div>
-
+<div id="productModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <button class="close-icon" onclick="closeModal()"><b>×</b></button>
+        <iframe id="modal-iframe" src="" width="100%" height="500" style="border: none;"></iframe>
+    </div>
+</div>
 </body>
 </html>
