@@ -14,9 +14,9 @@ $api = (new ApiBuilder())->init()
 $response = $api->getResponse();
 $_SESSION['authToken'] = $response->authToken;
 if ($redirect == null)
-    header("Location: /home/");
+    header("Location: ../home/");
 else
-    header("Location: /" . $redirect . "/");
+    header("Location: ../" . $redirect . "/");
 ?>
 
 
