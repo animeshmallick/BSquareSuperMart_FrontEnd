@@ -20,6 +20,7 @@ if(isset($response->authToken)) {
         header("Location: ../" . $redirect . "/");
 }else{
     echo "Error Getting Auth Token from Server";
+    print_r($response);
 }
 ?>
 
