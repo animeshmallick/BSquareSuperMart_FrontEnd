@@ -14,9 +14,9 @@ $api = (new ApiBuilder())->init()
 $response = $api->getResponse();
 $_SESSION['authToken'] = $response->authToken;
 if ($redirect == null)
-    header("Location: /Bsquaresupermart/home/");
+    header("Location: /home/");
 else
-    header("Location: /Bsquaresupermart/" . $redirect . "/");
+    header("Location: /" . $redirect . "/");
 ?>
 
 
