@@ -95,7 +95,7 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){ ?>
                     Orders cannot be cancelled once packed for delivery. In case of unexpected delays, a refund will be provided, if applicable.
                 </div>
 
-                <?php if(isset($_SESSION['authToken']) && $common->is_user_logged_in($_SESSION['authToken'])){ ?>
+                <?php if(isset($_GET['login']) || (isset($_SESSION['authToken']) && $common->is_user_logged_in($_SESSION['authToken']))){ ?>
 
                     <div class="checkout-summary">
                         <div class="address-section">
