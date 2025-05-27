@@ -14,7 +14,7 @@ function handleBackButton() {
 function displayProduct() {
     document.querySelectorAll('.product-outer-container').forEach(tile => {
         tile.addEventListener('click', function () {
-            const productId = this.getAttribute('productId');
+            const productId = tile.getAttribute('productId');
             const iframe = document.getElementById('modal-iframe');
             iframe.src = '../products/index.php?productId=' + productId;
             document.getElementById('productModal').style.display = 'flex';

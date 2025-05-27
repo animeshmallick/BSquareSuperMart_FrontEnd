@@ -55,18 +55,22 @@ $similarProducts = $similarProduct_api->getResponse();
     </div>
     <h3>Similar products</h3>
     <div class="similar-products" id="similarProductsList">
-        <?php foreach ($similarProducts as $similarProduct){ ?>
-            <div class="productTile">
-                <img src="<?= $similarProduct->productImg ?>" alt="<?= $similarProduct->productName ?>">
-                <div><b><?= $similarProduct->productName ?></b></div>
-                <div><?= $similarProduct->productSize ?></div>
-                <div style="display: flex; justify-content: space-between">
-                    <div>₹ <?= $similarProduct->productPrice ?></div>
-                    <div id="addProduct_<?= $similarProduct->productId ?>">
-                        <script>addProductQuantityContainer(<?= $similarProduct->productId ?>);</script>
+        <?php if(!empty((array)$similarProducts)){?>
+            <?php foreach ($similarProducts as $similarProduct){ ?>
+                <div class="productTile">
+                    <img src="<?= $similarProduct->productImg ?>" alt="<?= $similarProduct->productName ?>">
+                    <div><b><?= $similarProduct->productName ?></b></div>
+                    <div><?= $similarProduct->productSize ?></div>
+                    <div style="display: flex; justify-content: space-between">
+                        <div>₹ <?= $similarProduct->productPrice ?></div>
+                        <div id="addProduct_<?= $similarProduct->productId ?>">
+                            <script>addProductQuantityContainer(<?= $similarProduct->productId ?>);</script>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php } ?>
+        <?php }else{ ?>
+            <b> No similar products </>
         <?php } ?>
     </div>
     <div class="cart-bar" id="cartBar" style="display: none;">
