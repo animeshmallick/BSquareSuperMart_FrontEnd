@@ -12,6 +12,10 @@
 <div class="form-container" id="addNewProductToDatabase">
     <form id="productForm" method="POST" enctype="multipart/form-data">
         <div class="form-group">
+            <label for="name">Category Header</label>
+            <input type="text" name="category_header" required>
+        </div>
+        <div class="form-group">
             <label for="name">Product Name</label>
             <input type="text" name="name" required>
         </div>
