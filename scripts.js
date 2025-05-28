@@ -10,7 +10,6 @@ function addProduct(productId) {
         cart.push({"ProductID":productId , "Quantity":1});
         localStorage.setItem('cart', JSON.stringify(cart));
     }
-    updateProductQuantityContainer(productId);
 }
 
 function addProductQuantityContainer(productId) {
@@ -85,7 +84,6 @@ function decrementProductQuantityInCart(productId){
     }else{
         localStorage.removeItem('cart');
     }
-    updateProductQuantityContainer(productId);
 }
 
 function incrementProductQuantityInCart(productId){
@@ -99,7 +97,6 @@ function incrementProductQuantityInCart(productId){
         }
     }
     localStorage.setItem('cart', JSON.stringify(cart));
-    updateProductQuantityContainer(productId);
 }
 
 function updateProductQuantityContainer(productId){
