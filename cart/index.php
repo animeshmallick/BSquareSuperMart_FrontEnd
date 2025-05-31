@@ -73,14 +73,14 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") { ?>
                     <?php } ?>
                 </div>
 
-                <div class="bill-section-wrapper">
+                <div class="bill-section-wrapper full-width-bill-box">
                     <div class="bill-section-title">Bill Details</div>
                     <div class="bill-line"><span>🛒 Items total</span><span>₹<?= $cart->bill->cart_items_total ?></span></div><hr>
-                    <div class="bill-line"><span>🚚 Delivery charge</span><span>₹<?= $cart->bill->delivery_fee ?></span></div><hr>
-                    <div class="bill-line"><span>📦 Packaging charge</span><span>₹<?= $cart->bill->packaging_fee ?></span></div><hr>
-                    <div class="bill-line"><span>🖥️ Platform charge</span><span>₹<?= $cart->bill->platform_fee ?></span></div><hr>
+                    <div class="bill-line"><span>🚚 Delivery charge</span><span>₹<?= $cart->bill->delivery_fee ?></span></div>
+                    <div class="bill-line"><span>📦 Packaging charge</span><span>₹<?= $cart->bill->packaging_fee ?></span></div>
+                    <div class="bill-line"><span>🖥️ Platform charge</span><span>₹<?= $cart->bill->platform_fee ?></span></div>
                     <?php if (isset($cart->bill->small_cart_fee)) { ?>
-                        <div class="bill-line"><span>🧺 Small cart charge</span><span>₹<?= $cart->bill->small_cart_fee ?></span></div><hr>
+                        <div class="bill-line"><span>🧺 Small cart charge</span><span>₹<?= $cart->bill->small_cart_fee ?></span></div>
                     <?php } ?>
                     <?php if (isset($cart->bill->restricted_cart_fee)) { ?>
                         <div class="bill-line"><span>🔒 Restricted cart charge</span><span>₹<?= $cart->bill->restricted_cart_fee ?></span></div><hr>

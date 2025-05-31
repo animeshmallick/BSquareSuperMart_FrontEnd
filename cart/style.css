@@ -87,6 +87,11 @@ html, body {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
+.full-width-bill-box {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .bill-section-title {
     font-weight: 600;
     margin-bottom: 8px;
