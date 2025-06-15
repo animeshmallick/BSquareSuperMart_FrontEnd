@@ -1,13 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const productId_param = new URLSearchParams(location.search).get("productId");
-    const urlPath = BACKEND_URI + "/product/" + productId_param;
-    fetch(urlPath)
-        .then(response => {
-            console.log(urlPath);
-            console.log(response);
-            return response.json(); })
+    fetch(BACKEND_URI + "/product/" + productId_param)
+        .then(response => response.json())
         .then(product => {
-            console.log(product);
             if(!('error' in product)) {
                 displayProductDetails(product);
                 fetch(BACKEND_URI + "/similarProducts/" + productId_param)
