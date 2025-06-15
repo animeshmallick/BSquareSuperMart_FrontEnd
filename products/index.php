@@ -1,20 +1,3 @@
-<?php
-include "../Common.php";
-include "../ApiBuilder.php";
-$productId_param = $_GET['productId'] ?? null;
-$product_path = "/product/".$productId_param;
-$product_api = (new ApiBuilder())->init()
-    ->setMethod("GET")
-    ->setPath($product_path)
-    ->execute();
-$product = $product_api->getResponse();
-$similarProduct_path = "/similarProducts/".$product->productId;
-$similarProduct_api = (new ApiBuilder())->init()
-    ->setMethod("GET")
-    ->setPath($similarProduct_path)
-    ->execute();
-$similarProducts = $similarProduct_api->getResponse();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,57 +10,30 @@ $similarProducts = $similarProduct_api->getResponse();
     <script src="../scripts.js"></script>
 </head>
 <body>
-
     <div class="container" id="productDetails">
-
-        <img src="<?= $product->productImg ?>" alt="<?= $product->productName ?>" class="product-image">
+        <img class="product-image" id="productImage">
         <div class="rating">
             <span>⭐⭐⭐⭐⭐</span>
             <span>(2224)</span>
         </div>
-        <h2><?= $product->productName ?></h2>
+        <h2 id="productName"></h2>
         <div>
-            <div><s>₹<?= $product->productMrp ?></s></div>
-            <div>₹<?= $product->productPrice ?></div>
-            <div><?= $product->productSize ?></div>
+            <div id="productMrp"></div>
+            <div id="productPrice"></div>
+            <div id="productSize"></div>
         </div>
 
-        <div id="addProduct_<?= $product->productId ?>">
-            <script>addProductQuantityContainer(<?= $product->productId ?>);</script>
-        </div>
-
+        <div class="addProduct"></div>
         <div class="product-description">
             <div class="productDescriptionTitle"><h3>About the Product</h3></div>
-            <div class="section-content">
-                <p><?= $product->productDescription ?></p>
+            <div class="section-content" id="productDescription">
+                <p></p>
             </div>
         </div>
     </div>
     <h3>Similar products</h3>
     <div class="similar-products" id="similarProductsList">
-        <?php if(!empty((array)$similarProducts)){?>
-            <?php foreach ($similarProducts as $similarProduct){ ?>
-                <div class="productTile">
-                    <img src="<?= $similarProduct->productImg ?>" alt="<?= $similarProduct->productName ?>">
-                    <div><b><?= $similarProduct->productName ?></b></div>
-                    <div><?= $similarProduct->productSize ?></div>
-                    <div style="display: flex; justify-content: space-between">
-                        <div>₹ <?= $similarProduct->productPrice ?></div>
-                        <div id="addProduct_<?= $similarProduct->productId ?>">
-                            <script>addProductQuantityContainer(<?= $similarProduct->productId ?>);</script>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-        <?php }else{ ?>
-            <b> No similar products </>
-        <?php } ?>
-    </div>
-    <div class="cart-bar" id="cartBar" style="display: none;">
-        <div><span id="cartItemsCount"></span><span> items in cart</div>
-        <a href="../cart" class="btn btn-primary">Go to Cart</a>
-        <script>updateItemsCountInFooter()</script>
-    </div>
 
+    </div>
 </body>
 </html>
