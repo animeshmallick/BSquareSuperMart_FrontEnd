@@ -37,7 +37,7 @@ if ($current_hour >= 4 && $current_hour < 12) {
 <div class="container-fluid top-bar">
     <div class="d-flex justify-content-between align-items-center">
         <div class="delivery-info">
-            <h3 class="animate__animated animate__pulse">
+            <h3 class="animate_animated animate_pulse">
                 <?= htmlspecialchars($greeting) ?>, Welcome to <strong>BSquareSuperMart</strong>!
                 <small>🚚 Delivery in 15 minutes</small>
             </h3>
@@ -64,9 +64,9 @@ if ($current_hour >= 4 && $current_hour < 12) {
         <a class="dropdown-item" href="../index.php">🏠 Home</a>
         <a class="dropdown-item" href="../profile/index.php">👤 My Profile</a>
         <a class="dropdown-item" href="../orders/index.php">📦 My Orders</a>
-        <a class="dropdown-item" href="../categories/index.php">🗂️ Categories</a>
+        <a class="dropdown-item" href="../categories/index.php">🗂 Categories</a>
         <a class="dropdown-item" href="../cart/index.php">🛒 Cart</a>
-        <a class="dropdown-item" href="../aboutus/index.php">ℹ️ About Us</a>
+        <a class="dropdown-item" href="../aboutus/index.php">ℹ About Us</a>
         <hr>
         <a class="dropdown-item text-danger" href="../logout.php">🚪 Logout</a>
     </div>
@@ -80,14 +80,14 @@ if ($current_hour >= 4 && $current_hour < 12) {
 <!-- Categories Section -->
 <div class="container mt-4">
     <?php foreach ($all_categories as $categoryHeader => $categories) { ?>
-        <h5 class="category-title animate__animated animate__fadeInLeft"><?= htmlspecialchars($categoryHeader) ?></h5>
+        <h5 class="category-title animate_animated animate_fadeInLeft"><?= htmlspecialchars($categoryHeader) ?></h5>
         <div class="row g-3">
             <?php foreach ($categories as $category) { ?>
-                <div class="col-6 col-md-4 col-lg-3 animate__animated animate__zoomIn">
+                <div class="col-6 col-md-4 col-lg-3 animate_animated animate_zoomIn">
                     <a href="../category/index.php?category=<?= rawurlencode($category->name) ?>" class="text-decoration-none">
                         <div class="category-card text-center">
-                            <img src="<?= $category->image_url ?? 'https://via.placeholder.com/150' ?>" alt="<?= htmlspecialchars($category->name) ?>" class="category-img">
-                            <div class="category-name"><?= htmlspecialchars($category->name) ?></div>
+                            <img src="<?= $category->image ?? 'https://via.placeholder.com/150' ?>" alt="<?= htmlspecialchars($category->category) ?>" class="category-img">
+                            <div class="category-name"><?= htmlspecialchars($category->category) ?></div>
                         </div>
                     </a>
                 </div>
