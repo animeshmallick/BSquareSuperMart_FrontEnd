@@ -84,7 +84,7 @@ if ($current_hour >= 4 && $current_hour < 12) {
         <div class="row g-3">
             <?php foreach ($categories as $category) { ?>
                 <div class="col-6 col-md-4 col-lg-3 animate_animated animate_zoomIn">
-                    <a href="../category/index.php?category=<?= rawurlencode($category->name) ?>" class="text-decoration-none">
+                    <a href="../category/index.php?category=<?= rawurlencode($category->category) ?>" class="text-decoration-none">
                         <div class="category-card text-center">
                             <img src="<?= $category->image ?? 'https://via.placeholder.com/150' ?>" alt="<?= htmlspecialchars($category->category) ?>" class="category-img">
                             <div class="category-name"><?= htmlspecialchars($category->category) ?></div>
