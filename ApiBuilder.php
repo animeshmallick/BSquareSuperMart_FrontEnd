@@ -19,7 +19,7 @@ class ApiBuilder {
     }
     function init(): ApiBuilder
     {
-        $this->protocol = $_ENV['BACKEND_PROTOCOL'];
+        $this->protocol = $_ENV['BACKEND_ENV'] == "LOCAL" ? "http" : "https";
         $this->hostname = $this->getHostname();
         $this->port = $_ENV['BACKEND_PORT'];
         $this->path = '/';
