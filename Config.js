@@ -1,5 +1,5 @@
 const CONFIG = {
-    BACKEND_ENV: "QA", //"PROD" for Production backend and "local" for local backend
+    BACKEND_ENV: "LOCAL", //"PROD" for Production backend and "local" for local backend
 
     BACKEND_LOCAL_IP: "localhost:7777",
     BACKEND_QA_IP: "qa.bsquaresupermart.in",
