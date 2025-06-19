@@ -4,7 +4,6 @@ require_once __DIR__ . '/vendor/autoload.php';
 class ApiBuilder {
     private String $protocol;
     private String $hostname;
-    private int $port;
     private String $path;
     private string $method;
     private array $queryParams;
@@ -21,7 +20,6 @@ class ApiBuilder {
     {
         $this->protocol = $_ENV['BACKEND_ENV'] == "LOCAL" ? "http" : "https";
         $this->hostname = $this->getHostname();
-        $this->port = $_ENV['BACKEND_PORT'];
         $this->path = '/';
         $this->queryParams = [];
         $this->headers = [];
@@ -34,10 +32,10 @@ class ApiBuilder {
     private function getHostname(): String|null
     {
         if ($_ENV['BACKEND_ENV'] === 'PROD')
-            return $_ENV['BACKEND_PROD_IP'];
+            return $_ENV['BACKEND_PROD_IP']."/api";
 
         if ($_ENV['BACKEND_ENV'] === 'QA')
-            return $_ENV['BACKEND_QA_IP'];
+            return $_ENV['BACKEND_QA_IP']."/api";
 
         if ($_ENV['BACKEND_ENV'] === 'LOCAL')
             return $_ENV['BACKEND_LOCAL_IP'];
@@ -97,7 +95,7 @@ class ApiBuilder {
 
     private function prepareCurlCommand(): CurlHandle|bool
     {
-        $this->url = $this->protocol . "://" . $this->hostname . ":" . $this->port . $this->path;
+        $this->url = $this->protocol . "://" . $this->hostname . $this->path;
         if ($this->method == 'GET') {return $this->prepareGetCall();}
         if ($this->method == 'POST') {return $this->preparePostCall();}
         return false;
