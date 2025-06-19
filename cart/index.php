@@ -14,6 +14,7 @@ $isLoggedIn = $common->is_user_logged_in($_SESSION['authToken'] ?? null)
     <link rel="stylesheet" href="style.css">
     <script src="../Config.js"></script>
     <script src="script.js"></script>
+    <script src="../scripts.js"></script>
 </head>
 <body>
 <div class="cart-container">

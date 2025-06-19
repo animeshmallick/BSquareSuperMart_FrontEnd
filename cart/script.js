@@ -32,9 +32,9 @@ function updateProductsContainerInCart(cartResponse){
                         <div><strong>₹${product.selling_price}</strong></div>
                     </div>
                     <div class="quantity-control">
-                        <button class="qty-btn">-</button>
+                        <button class="qty-btn" onclick="decrementProductInCart(${product.id})">-</button>
                         <span>${product.quantity}</span>
-                        <button class="qty-btn">+</button>
+                        <button class="qty-btn" onclick="incrementProductInCart(${product.id})">+</button>
                     </div>
                 `;
         productsContainer.appendChild(productContainer);
@@ -58,4 +58,12 @@ function updateBillDetailsInCart(cartResponse){
 }
 function updateDeliveryInfo(cartResponse){
     document.querySelector("div.delivery-info-box").innerHTML = `Delivery in 13 minutes <br /> Shipment of ${cartResponse.products.length} items(s)`
+}
+function incrementProductInCart(productID){
+    incrementProductQuantityInCart(productID);
+    location.reload();
+}
+function decrementProductInCart(productID){
+    decrementProductQuantityInCart(productID);
+    location.reload();
 }
