@@ -31,6 +31,8 @@ if ($current_hour >= 4 && $current_hour < 12) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0/dist/fuse.min.js"></script>
+    <script src="../Config.js"></script>
 </head>
 <body>
 
@@ -38,7 +40,7 @@ if ($current_hour >= 4 && $current_hour < 12) {
     <div class="d-flex justify-content-between align-items-center">
         <div class="delivery-info">
             <h3 class="animate_animated animate_pulse">
-                <?= htmlspecialchars($greeting) ?>, Welcome to <strong>BSquareSuperMart</strong>!
+                Welcome to <strong>BSquareSuperMart</strong>!
                 <small>🚚 Delivery in 15 minutes</small>
             </h3>
             <p id="address" data-bs-toggle="modal" data-bs-target="#addressModal">🏠 HOME - Flat No 2A 009 ▼</p>
@@ -51,6 +53,7 @@ if ($current_hour >= 4 && $current_hour < 12) {
     </div>
     <div class="mt-3">
         <input type="text" class="form-control search-bar" placeholder="Search for 'sugar', 'bread', etc.">
+        <div id="searchResults" class="dropdown-menu" style="width: 90%; position: absolute; z-index: 1000;"></div>
     </div>
 </div>
 

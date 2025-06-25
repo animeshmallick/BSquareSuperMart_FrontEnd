@@ -1,27 +1,52 @@
+let products = [];
+let fuse;
+let searchBox = undefined, searchDropdown = undefined;
 document.addEventListener("DOMContentLoaded", () => {
-    const sidebar = document.getElementById("userMenu");
-    const openBtn = document.getElementById("openSidebar");
-    const closeBtn = document.getElementById("closeSidebar");
+    fetch(BACKEND_URI + "/getAllProducts")
+        .then(res => res.json())
+        .then(data => {
+            products = data;
+            fuse = new Fuse(products, {
+                keys: ["name", "brand", "category", "subcategory", "description", "tags"],
+                threshold: 0.4,
+                includeScore: true
+            });
+        })
+        .catch(err => {
+            console.log("Failed to fetch products from Backend");
+        });
 
-    function openSidebar() {
-        sidebar.classList.add("show");          // Show sidebar
-        sidebar.removeAttribute("aria-hidden"); // Make visible to screen readers
-        sidebar.removeAttribute("inert");       // Make focusable/interactable
-        sidebar.focus();                        // Optional: focus for accessibility
+    searchBox = document.querySelector("input.search-bar");
+    searchDropdown = document.getElementById("searchResults");
 
-        openBtn.style.display = "none";
-        closeBtn.style.display = "inline-block";
-    }
+    searchBox.addEventListener("input", () => {
+        const query = searchBox.value.trim();
+        if (!query) {
+            searchDropdown.innerHTML = '';
+            searchDropdown.classList.remove('show');
+            return;
+        }
 
-    function closeSidebar() {
-        sidebar.classList.remove("show");       // Hide sidebar
-        sidebar.setAttribute("aria-hidden", "true");
-        sidebar.setAttribute("inert", "");      // Disable interactions
+        const results = fuse.search(query).slice(0, 6); // Top 6 results
+        if (results.length === 0) {
+            searchDropdown.innerHTML = `<div class="dropdown-item text-muted">No products found</div>`;
+        } else {
+            searchDropdown.innerHTML = results.map(({ item }) => `
+                <a href="../products/index.php?productId=${item.id}" class="dropdown-item d-flex align-items-center">
+                    <img src="${item.image_url}" alt="${item.name}" style="width:40px; height:40px; object-fit:cover; margin-right:10px;">
+                    <div>
+                        <div><strong>${item.name}</strong></div>
+                        <small class="text-muted">${item.brand}</small>
+                    </div>
+                </a>
+            `).join('');
+        }
 
-        openBtn.style.display = "inline-block";
-        closeBtn.style.display = "none";
-    }
-
-    openBtn.addEventListener("click", openSidebar);
-    closeBtn.addEventListener("click", closeSidebar);
+        searchDropdown.classList.add("show");
+    });
+    document.addEventListener("click", (e) => {
+        if (!searchBox.contains(e.target) && !searchDropdown.contains(e.target)) {
+            searchDropdown.classList.remove("show");
+        }
+    });
 });
