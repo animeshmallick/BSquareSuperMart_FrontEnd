@@ -20,8 +20,10 @@ document.addEventListener("DOMContentLoaded",function(){
 function displayCategoryHeader(category){
     const categoryHeader = document.getElementById("categoryHeader");
     categoryHeader.innerHTML = `
-    <button class="back-button" onclick="handleBackButton()">←</button>
-        <h2>${category}</h2>`;
+        <div style="display: flex">
+            <button class="back-button" onclick="handleBackButton()">←</button>
+            <div class="category_name">${category}</div>        
+        </div>`;
 }
 
 function displaySidebar(subcategories){
@@ -31,7 +33,12 @@ function displaySidebar(subcategories){
         const sidebarListItem = document.createElement('div');
         sidebarListItem.innerHTML = `
         <div class="sidebar-subcategory-item" id="${subcategory}">
-        <img src="https://via.placeholder.com/30" alt="${subcategory}"> <h6>${subcategory}</h6>   
+            <div>
+                <img src="https://via.placeholder.com/30" alt="${subcategory}">
+            </div>
+            <div>
+                <h6>${subcategory}</h6>
+            </div>   
         </div> `;
         sidebarListItem.addEventListener('click',() => displayProductsForSubcategory(subcategory))
         sidebarList.appendChild(sidebarListItem);
