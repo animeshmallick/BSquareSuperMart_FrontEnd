@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded",function(){
 function displayCategoryHeader(category){
     const categoryHeader = document.getElementById("categoryHeader");
     categoryHeader.innerHTML = `
-        <div style="display: flex">
+        <div style="display: flex; margin: 0.25rem;">
             <button class="back-button" onclick="handleBackButton()">←</button>
             <div class="category_name">${category}</div>        
         </div>`;
