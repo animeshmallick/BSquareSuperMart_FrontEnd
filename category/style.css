@@ -1,7 +1,8 @@
 body {
     margin: 0.25rem;
-    background: linear-gradient(to right, #edcf08, #04ddf1);
+    border-radius: 1rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #10b981, gray);
     height: 100vh;
     overflow: hidden;
     color: #333;
@@ -11,8 +12,8 @@ body {
     width: 100%;
     font-size: 1.75rem;
     text-align: center;
-    color: black;
-    background-color: wheat;
+    background-color: #10b981;
+    color: wheat;
 }
 .wrapper {
     border-radius: 1rem;
@@ -24,7 +25,7 @@ body {
 .sidebar {
     border-radius: 1rem;
     flex: 0 0 20%;
-    background: linear-gradient(to right, #edcf08, #04ddf1);
+    background: linear-gradient(to right, #10b981, #edcf08);
     max-width: 20%;
     border-right: 1px solid #e1e1e1;
     padding: 0.3rem 0.3rem;
@@ -128,7 +129,7 @@ h5.productDescription {
 }
 .back-button {
     border-radius: 1rem;
-    background: linear-gradient(to right, gray, cornflowerblue);
+    background: linear-gradient(to right, #edcf08, wheat);
     border: none;
     padding: 0.5rem 0.9rem;
     font-size: 1.1rem;
@@ -146,16 +147,17 @@ h5.productDescription {
     color: #111;
 }
 .cart-bar {
+    border-radius: 1rem;
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 60%;
+    margin-left: 20%;
     background-color: #10b981;
     color: white;
     padding: 0.75rem 1rem;
     display: flex;
     justify-content: center;
-    z-index: 999;
     box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
     transition: all 0.3s ease-in-out;
 }
