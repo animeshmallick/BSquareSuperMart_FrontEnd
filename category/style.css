@@ -160,6 +160,7 @@ h5.productDescription {
     justify-content: center;
     box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
     transition: all 0.3s ease-in-out;
+    margin-bottom: 1rem;
 }
 
 .cart-bar-content {
