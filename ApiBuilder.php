@@ -32,10 +32,10 @@ class ApiBuilder {
     private function getHostname(): String|null
     {
         if ($_ENV['BACKEND_ENV'] === 'PROD')
-            return $_ENV['BACKEND_PROD_IP']."/api";
+            return $_ENV['BACKEND_PROD_IP'];
 
         if ($_ENV['BACKEND_ENV'] === 'QA')
-            return $_ENV['BACKEND_QA_IP']."/api";
+            return $_ENV['BACKEND_QA_IP'];
 
         if ($_ENV['BACKEND_ENV'] === 'LOCAL')
             return $_ENV['BACKEND_LOCAL_IP'];
