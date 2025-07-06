@@ -35,7 +35,7 @@ $isLoggedIn = $common->is_user_logged_in($_SESSION['authToken'] ?? null)
             <?php if ($isLoggedIn) { ?>
                 <div class="pay-summary-box summary-combined-box">
                     <div class="half-box grand-total">Grand Total: ₹</div>
-                    <button class="pay-btn modern-btn half-box">Proceed to Checkout</button>
+                    <button class="pay-btn modern-btn half-box" onclick="window.location.href='../checkout/'">Proceed to Checkout</button>
                 </div>
             <?php } else { ?>
                 <div class="pay-summary-box summary-combined-box">
