@@ -1,4 +1,4 @@
-name: Deploy to EC2 and start Apache and MySql Servers
+name: Deploy to EC2 and start Apache and MySql Servers on QA Machine
 
 on:
   push:
