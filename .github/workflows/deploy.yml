@@ -1,4 +1,4 @@
-name: Deploy to EC2 and start Apache and MySql Servers
+name: Deploy to EC2 and start Apache and MySql Servers on QA Machine
 
 on:
   push:
@@ -27,8 +27,8 @@ jobs:
           USER: ${{ secrets.EC2_USER }}
         run: |
           ssh $USER@$HOST << 'EOF'
-            cd /var/www/html/BSquareSuperMart
-            git config --global --add safe.directory /var/www/html/BSquareSuperMart
+            cd /var/www/html/BSquareSuperMart_FrontEnd
+            git config --global --add safe.directory /var/www/html/BSquareSuperMart_FrontEnd
             sudo git pull origin mainline
             sudo systemctl restart httpd
             sudo systemctl restart mysqld
