@@ -23,6 +23,14 @@ function decrementProductInCart(productID){
     decrementProductQuantityInCart(productID);
     location.reload();
 }
-function displaySelectedAddress(addressId){
 
+//Validate purchase ID and redirect to either thankyou page or order failed page
+function placeOrderHandler(){
+    const form = document.querySelector("form");
+    const cartInput = document.createElement("input");
+    cartInput.type = "hidden";
+    cartInput.name = "cart";
+    cartInput.value = JSON.stringify(JSON.parse(localStorage.getItem('cart')));
+    form.appendChild(cartInput);
+    form.submit();
 }
