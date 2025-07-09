@@ -71,6 +71,7 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
             <?php endforeach; ?>
             <button type="submit">Proceed to Payment</button>
             </form>
+            <a href="../addAddress/index.php?redirect=checkout">Add New Address</a>
         </div>
 
         </body>
