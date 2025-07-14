@@ -1,0 +1,153 @@
+body {
+    background: linear-gradient(145deg, #f0f4f8, #e4ecf3);
+    font-family: 'Segoe UI', sans-serif;
+    padding: 20px;
+    color: #1f2937;
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.purchase-container {
+    max-width: 1100px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    padding: 32px;
+    backdrop-filter: blur(8px);
+}
+
+.header {
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+}
+
+.header h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #111827;
+}
+
+.details {
+    font-size: 14px;
+    color: #4b5563;
+    margin-bottom: 6px;
+}
+
+.address, .payment {
+    background-color: #f9fafb;
+    border-left: 4px solid #3b82f6;
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.product-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+}
+
+.product-content {
+    padding: 16px;
+}
+
+.product-content h4 {
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: #1e40af;
+}
+
+.product-content p {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.price {
+    margin-top: 8px;
+    font-size: 15px;
+    color: #111827;
+    font-weight: 600;
+}
+
+.mrp {
+    text-decoration: line-through;
+    color: #9ca3af;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+@media (max-width: 600px) {
+    .purchase-container {
+        padding: 16px;
+    }
+
+    .product-card img {
+        height: 150px;
+    }
+}
+.purchase-container {
+    max-width: 1100px;
+    margin: auto;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.9);
+    border-left: 10px solid #d1d5db; /* default gray */
+}
+
+.status-badge {
+    display: inline-block;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-weight: 600;
+    margin-top: 6px;
+}
+
+/* Themes */
+.status-placed         { border-color: #3b82f6; } /* blue */
+.status-confirmed      { border-color: #2563eb; }
+.status-packaging      { border-color: #f59e0b; }
+.status-packaging-complete { border-color: #edcf08; }
+.status-out-for-delivery   { border-color: #6304c2; }
+.status-cancelled      { border-color: #ef4444; }
+.status-payment-pending   { border-color: #21cd07; }
+.status-payment-success   { border-color: #22c55e; }
+
+.status-placed .status-badge         { background: #3b82f6; color: white; }
+.status-confirmed .status-badge      { background: #2563eb; color: white; }
+.status-packaging .status-badge      { background: #f59e0b; color: white; }
+.status-packaging-complete .status-badge { background: #10b981; color: white; }
+.status-out-for-delivery .status-badge   { background: #0ea5e9; color: white; }
+.status-cancelled .status-badge      { background: #ef4444; color: white; }
+.status-payment-pending .status-badge   { background: #f97316; color: white; }
+.status-payment-success .status-badge   { background: #22c55e; color: white; }
