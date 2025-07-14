@@ -1,0 +1,21 @@
+.spc-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-y: auto ;
+}
+.placeorder-btn{
+    background-color: #28a745;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}

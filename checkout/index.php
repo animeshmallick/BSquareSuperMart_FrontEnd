@@ -117,11 +117,13 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <title>Order Summary</title>
                 <link rel="stylesheet" href="../cart/style.css">
+                <link rel="stylesheet" href="style.css">
                 <script src="../scripts.js"></script>
                 <script src="script.js" defer></script>
                 <script src="../Config.js"></script>
             </head>
             <body>
+            <div class="spc-container">
                 <div id="cart_items_container"></div>
                 <div class="bill-section-wrapper full-width-bill-box"></div>
                 <div class="address" id="address">
@@ -133,10 +135,13 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
                 <div class="payment" id="payment">
                     <span><?= htmlspecialchars($payment->name) ?></span>
                 </div>
-                <div class="half-box grand-total"></div>
-                <form method="POST" action="placeOrderHandler.php">
-                    <button onclick="placeOrderHandler()">Place Order</button>
-                </form>
+                <div class="pay-summary-box summary-combined-box">
+                    <div class="half-box grand-total"></div>
+                    <form method="POST" action="placeOrderHandler.php">
+                        <button class="placeorder-btn" onclick="placeOrderHandler()">Place Order</button>
+                    </form>
+                </div>
+            </div>
             </body>
             </html>
     <?php } ?>
