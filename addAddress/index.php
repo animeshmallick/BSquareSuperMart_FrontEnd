@@ -17,7 +17,7 @@ $error = $_GET['error'] ?? null;
     <input type="text" name="address_line2" placeholder="Address Line 2" required/>
     <input type="text" name="redirect" hidden="hidden" readonly="readonly" value="<?=$redirect?>"/>
     <button type="submit"> Save </button>
-    <?php if(!$error){?>
+    <?php if($error){?>
         <h3><?=$error?></h3>
     <?php } ?>
 </form>
