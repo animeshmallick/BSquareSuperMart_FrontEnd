@@ -61,7 +61,7 @@ $all_categories = $api->getResponse();
 </div>
 
 <!-- Banner -->
-<div class="container animated-inline-banner">
+<div style="max-height: 25%" class="container animated-inline-banner">
     <img src="../images/animated_grocery_banner.gif" alt="Animated Grocery and Kitchen Banner"/>
 </div>
 
