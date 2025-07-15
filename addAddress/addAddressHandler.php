@@ -8,8 +8,6 @@ $addr_line1 = $_POST['address_line1'];
 $addr_line2 = $_POST['address_line2'];
 $address = ["addr_line1" => $addr_line1,
             "addr_line2" => $addr_line2];
-//$address->address_line1 = $addr_line1;
-//$address->address_line2 = $addr_line2;
 $authToken =  $_SESSION['authToken'];
 $api = (new ApiBuilder())
     ->init()
@@ -20,7 +18,6 @@ $api = (new ApiBuilder())
     ])
     ->setRequestBody($address)
     ->execute();
-echo $api->getStatusCode();
 if ($api->getStatusCode() == 200 && isset($api->getResponse()->success)){
     if($redirect !== null) {
         header("Location: ../".$redirect."/");
