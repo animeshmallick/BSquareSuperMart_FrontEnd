@@ -13,7 +13,7 @@ body {
 }
 
 .top-bar {
-    padding: 1.5rem;
+    padding: 0.75rem;
     background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
     color: white;
     border-radius: 0 0 1rem 1rem;
@@ -142,7 +142,7 @@ body {
 footer {
     background: var(--footer-bg);
     color: #e5e7eb;
-    padding: 2rem 1rem;
+    padding: 1rem 0.5rem;
     text-align: center;
     margin-top: 3rem;
     border-top-left-radius: 1.5rem;
