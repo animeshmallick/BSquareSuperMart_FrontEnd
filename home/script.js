@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(BACKEND_URI + "/getAllProducts")
         .then(res => res.json())
         .then(data => {
+            console.log(data);
             products = data;
             fuse = new Fuse(products, {
                 keys: ["name", "brand", "category", "subcategory", "description", "tags"],
@@ -32,13 +33,14 @@ document.addEventListener("DOMContentLoaded", () => {
             searchDropdown.innerHTML = `<div class="dropdown-item text-muted">No products found</div>`;
         } else {
             searchDropdown.innerHTML = results.map(({ item }) => `
-                <a href="../products/index.php?productId=${item.id}" class="dropdown-item d-flex align-items-center">
-                    <img src="${item.image_url}" alt="${item.name}" style="width:40px; height:40px; object-fit:cover; margin-right:10px;">
-                    <div>
-                        <div><strong>${item.name}</strong></div>
-                        <small class="text-muted">${item.brand}</small>
+                <a href="../products/index.php?productId=${item.id}" class="search-dropdown-item">
+                    <img src="${item.image_url}" alt="${item.name}">
+                    <div class="item-info">
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-brand">${item.brand}</div>
                     </div>
                 </a>
+
             `).join('');
         }
 
