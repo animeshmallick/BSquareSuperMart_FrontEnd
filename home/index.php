@@ -50,13 +50,12 @@ $all_categories = $api->getResponse();
         <button class="btn-close btn-close-white" id="closeNav"></button>
     </div>
     <ul>
-        <li><a href="#">🏠 Home</a></li>
+        <li><a href="index.php">🏠 Home</a></li>
         <li><a href="#">👤 Profile</a></li>
         <li><a href="#">📦 Orders</a></li>
-        <li><a href="#">🗂 Categories</a></li>
-        <li><a href="#">🛒 Cart</a></li>
+        <li><a href="../cart">🛒 Cart</a></li>
         <li><a href="#">ℹ About Us</a></li>
-        <li><a href="#" class="text-danger">🚪 Logout</a></li>
+        <li><a href="../logout.php" class="text-danger">🚪 Logout</a></li>
     </ul>
 </div>
 
