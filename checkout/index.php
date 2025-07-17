@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['address']) || isset(
 
 if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
     if(!$selectedAddress || (isset($_GET['change']) && $_GET['change'] == "address")) {
+        unset($_SESSION['purchase_doc']->selectedAddress);
         $api = (new ApiBuilder())
             ->init()
             ->setMethod('GET')
@@ -70,7 +71,7 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
                         </label>
                     </div>
                 <?php endforeach; ?>
-                <button type="submit">Proceed to Payment</button>
+                <button type="submit"><?= $selectedPayment ? "Order Summary" : "Proceed to Payment" ?></button>
                 </form>
                 <a href="../addAddress/index.php?redirect=checkout">Add New Address</a>
             </div>
