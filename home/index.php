@@ -31,7 +31,6 @@ $all_categories = $api->getResponse();
 <div class="top-bar d-flex justify-content-between align-items-center">
     <div class="delivery-info">
         <h3 class="animate__animated animate__fadeInDown">Welcome to <strong>BSquareSuperMart</strong>!</h3>
-        <p id="address" data-bs-toggle="modal" data-bs-target="#addressModal">🏠 HOME - Flat No 2A 009 ▼</p>
     </div>
     <button class="hamburger-btn" id="hamburgerToggle">
         <span></span><span></span><span></span>
@@ -50,13 +49,12 @@ $all_categories = $api->getResponse();
         <button class="btn-close btn-close-white" id="closeNav"></button>
     </div>
     <ul>
-        <li><a href="#">🏠 Home</a></li>
+        <li><a href="index.php">🏠 Home</a></li>
         <li><a href="#">👤 Profile</a></li>
         <li><a href="#">📦 Orders</a></li>
-        <li><a href="#">🗂 Categories</a></li>
-        <li><a href="#">🛒 Cart</a></li>
+        <li><a href="../cart">🛒 Cart</a></li>
         <li><a href="#">ℹ About Us</a></li>
-        <li><a href="#" class="text-danger">🚪 Logout</a></li>
+        <li><a href="../logout.php" class="text-danger">🚪 Logout</a></li>
     </ul>
 </div>
 
@@ -82,24 +80,6 @@ foreach ($all_categories as $category => $value) { ?>
 </div>
 <?php } ?>
 
-<!-- Address Modal -->
-<div class="modal fade" id="addressModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Select Address</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <ul class="list-group">
-                    <li class="list-group-item address-item">🏠 HOME - Flat No 2A 009</li>
-                    <li class="list-group-item address-item">🏢 Office - Block B 302</li>
-                    <li class="list-group-item address-item">🏡 Parent's House - Street 5</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
 <footer>
     <h5>BSquareSuperMart</h5>
     <p>&copy; 2025 All rights reserved.</p>
