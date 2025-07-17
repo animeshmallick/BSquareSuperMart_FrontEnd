@@ -1,8 +1,5 @@
 <?php
 session_start();
-include "../Common.php";
-$common = new Common();
-$isLoggedIn = $common->is_user_logged_in($_SESSION['authToken']) ?? null;
 $redirect = $_POST['redirect'] ?? null;
 $addr_line1 = $_POST['address_line1'];
 $addr_line2 = $_POST['address_line2'];
