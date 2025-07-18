@@ -72,7 +72,7 @@ foreach ($all_categories as $category => $value) { ?>
             <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in">
                 <div class="category-card text-center">
                     <img src="https://via.placeholder.com/150" class="category-img" alt="Grocery">
-                    <div class="category-name">Grocery</div>
+                    <div class="category-name"><?= $product->category ?></div>
                 </div>
             </div>
         <?php } ?>
