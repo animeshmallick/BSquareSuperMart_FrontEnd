@@ -19,8 +19,11 @@ if(isset($response->authToken)) {
     else
         header("Location: ../" . $redirect . "/");
 }else{
-    echo "Error Getting Auth Token from Server";
-    print_r($response);
+    if(!$redirect) {
+        header("Location: index.php?error=InvalidCredentials");
+    }else{
+        header("Location: index.php?error=InvalidCredentials&redirect=" . $redirect);
+    }
 }
 ?>
 
