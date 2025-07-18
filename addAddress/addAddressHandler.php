@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "../Common.php";
 $redirect = $_POST['redirect'] ?? null;
 $addr_line1 = $_POST['address_line1'];
 $addr_line2 = $_POST['address_line2'];
