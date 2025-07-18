@@ -26,6 +26,7 @@ if($isLoggedIn) {
                 ])
                 ->setRequestBody($requestBody)
                 ->execute();
+            unset($_SESSION['purchase_doc']);
             if ($api->getStatusCode() == 201 && $api->getResponse()->signed) {
                 header("Location: ../thankyou/index.php?PID=" . $api->getResponse()->purchase_id);
             } else {

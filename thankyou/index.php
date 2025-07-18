@@ -1,6 +1,5 @@
 <?php
 session_start();
-unset($_SESSION['purchase_doc']);
 include "../Common.php";
 $common = new Common();
 
