@@ -69,7 +69,7 @@ foreach ($all_categories as $category => $value) { ?>
     <h5 class="category-title" data-aos="fade-right"><?= $category ?></h5>
     <div class="row g-3">
         <?php foreach ($value as $product) { ?>
-            <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in">
+            <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" onclick="window.location.href='../category/index.php?category=<?= $product->category ?>'">
                 <div class="category-card text-center">
                     <img src="https://via.placeholder.com/150" class="category-img" alt="Grocery">
                     <div class="category-name"><?= $product->category ?></div>
