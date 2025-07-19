@@ -100,3 +100,91 @@ body {
     width: 90px;
     object-fit: contain;
 }
+
+.hamburger-btn {
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.hamburger-btn span {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+.side-nav {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 260px;
+    height: 100vh;
+    background: var(--side-gradient);
+    color: white;
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    z-index: 999;
+    transition: all 0.4s ease;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    animation: fadeInLeft 0.5s;
+}
+.side-nav.active {
+    left: 0;
+}
+.side-nav h4 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+.side-nav ul {
+    list-style: none;
+    padding: 0;
+}
+.side-nav ul li {
+    margin: 1rem 0;
+    animation: fadeInUp 0.6s ease both;
+}
+.side-nav ul li a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #fff;
+    transition: 0.3s;
+    display: block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+.side-nav ul li a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+footer {
+    background: var(--footer-bg);
+    color: #e5e7eb;
+    padding: 1rem 0.5rem;
+    text-align: center;
+    margin-top: 3rem;
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+    animation: fadeInUp 1s;
+}
+footer h5 {
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+footer p {
+    margin: 0.25rem 0;
+    font-size: 0.95rem;
+}
+footer a {
+    color: #a5b4fc;
+    text-decoration: none;
+}
+footer a:hover {
+    color: #c4b5fd;
+    text-decoration: underline;
+}
