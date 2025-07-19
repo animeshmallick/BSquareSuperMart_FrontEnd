@@ -1,21 +1,112 @@
 .spc-container {
+    padding: 0.5rem;
+    width: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    width: 100%;
+    flex: 1;
+    overflow-y: auto;
     box-sizing: border-box;
-    overflow-y: auto ;
+    border: 0.1rem solid rgba(80, 128, 73, 0.1);
+    box-shadow: 1rem 1rem 1rem rgb(49, 78, 56);
+    border-radius: 1rem;
 }
-.placeorder-btn{
+
+div.step{
+    padding:0.5rem;
+    border: 0.1rem solid rgba(80, 128, 73, 0.1);
+    box-sizing: border-box;
+    box-shadow: 1rem 1rem 1rem rgb(49, 78, 56);
+    border-radius: 1rem;
+}
+
+div.button{
+    margin: 1rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+h2 {
+    margin: 1rem;
+    color: #333;
+    font-size: 1.2rem;
+}
+h3{
+    margin-left:1rem;
+    margin-top:0.5rem;
+    margin-bottom: 0;
+    font-size: 0.8rem;
+}
+
+div.selectedInfo{
+    font-weight: bold;
+    padding: 0.2rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    box-sizing: border-box;
+    box-shadow: 0.5rem 0.5rem 0.5rem rgba(25, 23, 23, 0.05);
+    border-radius: 1rem;
+}
+label {
+    margin:0.1rem 0.1rem 0.1rem;
+    display: block;
+    padding: 0.5rem;
+    background-color: #fafafa;
+    border: 0.1rem solid #ddd;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+input[type="radio"] {
+    margin-right: 1rem;
+}
+
+button.primary {
+    padding: 0.5rem;
     background-color: #28a745;
     color: white;
     border: none;
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+button.secondary {
+    padding: 0.5rem;
+    background-color: wheat;
+    color: #3e3929;
+    border: 0.1rem solid #67592d;
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+button.change{
+    padding: 0.4rem;
+    background-color: wheat;
+    color: #3e3929;
+    height: 30px;
+    width:170px;
+    border: 0.1rem solid #67592d;
+    border-radius: 1rem;
+    font-size: 0.8rem;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
+}
+span.selectedContent{
+    padding: 0.5rem;
+    margin: 0.5rem;
+    font-size: 1rem;
+}
+div.selectedAddressPaymentWrapper{
+    background: white;
+    padding: 16px;
+    margin: 12px 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    box-sizing: border-box;
 }

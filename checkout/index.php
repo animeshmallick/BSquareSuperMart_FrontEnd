@@ -56,6 +56,7 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>Checkout</title>
+            <link rel="stylesheet" href="style.css">
         </head>
         <body>
             <!-- Step 1: Address Selection -->
@@ -64,16 +65,16 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
                 <form method="POST" action="../checkout/index.php">
                 <?php foreach ($userAddresses->userAddress as $index => $address):
                     $isSelected = ($selectedAddress &&  $selectedAddress->address_id == $address->address_id);?>
-                    <div>
                         <label><input type="radio" name="address" value="<?= htmlspecialchars(json_encode($address)) ?>" <?= $isSelected ? 'checked' : '' ?>>
-                            <?= htmlspecialchars($address->addr_line1) ?>,
-                            <?= htmlspecialchars($address->addr_line2) ?>
+                            <div><?= htmlspecialchars($address->addr_line1) ?></div>
+                            <div><?= htmlspecialchars($address->addr_line2) ?></div>
                         </label>
-                    </div>
                 <?php endforeach; ?>
-                <button type="submit"><?= $selectedPayment ? "Order Summary" : "Proceed to Payment" ?></button>
+                    <div class="button">
+                        <button class="secondary" type="button" onclick="window.location.href='../addAddress/index.php?redirect=checkout'">Add New Address</button>
+                        <button class="primary" type="submit"><?= $selectedPayment ? "Order Summary" : "Proceed to Payment" ?></button>
+                    </div>
                 </form>
-                <a href="../addAddress/index.php?redirect=checkout">Add New Address</a>
             </div>
         </body>
         </html>
@@ -93,6 +94,7 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>Checkout</title>
+            <link rel="stylesheet" href="style.css">
             <script>
                 //Clicking Add New Payment Method displays an alert
                 function addPayment(event){
@@ -111,15 +113,15 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
                     <label><input type="radio" name="payment" value="<?= htmlspecialchars(json_encode($paymentMethod)) ?>" required <?= $isSelected ? 'checked' : '' ?>> <?= htmlspecialchars($paymentMethod->name) ?>
                     </label>
                 <?php endforeach; ?>
-                <button type="submit">Order Summary</button>
+                    <div class="button">
+                        <button class="secondary" type="button" onclick="addPayment(event)">Add New Payment Method</button>
+                        <button class="primary" type="submit">Order Summary</button>
+                    </div>
                 </form>
-                <a href="#" onclick="addPayment(event)">Add New Payment Method</a>
             </div>
         </body>
         </html>
-    <?php }else { //SPC Page
-
-        ?>
+    <?php }else { //SPC Page?>
             <!DOCTYPE html>
             <html lang="en">
             <head>
@@ -136,24 +138,29 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
             <div class="spc-container">
                 <div id="cart_items_container"></div>
                 <div class="bill-section-wrapper full-width-bill-box"></div>
-                    <div class="half-box">
-                        <div class="address" id="address">
-                        <span>
-                            <?= htmlspecialchars($selectedAddress->addr_line1 ?? '') ?>,
-                            <?= htmlspecialchars($selectedAddress->addr_line2 ?? '') ?>
-                        </span>
-                        <span><a href="index.php?change=address">Change Address</a></span>
+                <div class="selectedAddressPaymentWrapper">
+                    <div class="selectedAddress">
+                        <h3>Deliver To:</h3>
+                        <div class="selectedInfo" id="address">
+                            <span class="selectedContent">
+                                <?= htmlspecialchars($selectedAddress->addr_line1 ?? '') ?>,
+                                <?= htmlspecialchars($selectedAddress->addr_line2 ?? '') ?>
+                            </span>
+                            <button class="change" type="button" onclick="window.location.href='index.php?change=address'">Change Address</button>
                         </div>
                     </div>
-                <div class="half-box">
-                    <div class="payment" id="payment">
-                        <span><?= htmlspecialchars($selectedPayment->name) ?></span>
-                        <span><a href="index.php?change=payment">Change Payment Method</a></span>
+                    <div class="selectedPayment">
+                        <h3>Payment Method:</h3>
+                        <div class="selectedInfo" id="payment">
+                            <span class="selectedContent"><?= htmlspecialchars($selectedPayment->name) ?></span>
+                            <button class="change" type="button" onclick="window.location.href='index.php?change=payment'">Change Payment Type</button>
+                        </div>
                     </div>
+                </div>
                 <div class="pay-summary-box summary-combined-box">
                     <div class="half-box grand-total"></div>
                     <form method="POST" action="placeOrderHandler.php">
-                        <button class="placeorder-btn" onclick="placeOrderHandler()">Place Order</button>
+                        <button class="primary" onclick="placeOrderHandler()">Place Order</button>
                     </form>
                 </div>
             </div>
