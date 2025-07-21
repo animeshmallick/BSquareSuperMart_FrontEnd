@@ -1,0 +1,83 @@
+.purchases-container{
+    max-width: 1100px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+.purchase-card{
+    border-left: 10px solid;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 10px;
+}
+.address-payment{
+    /*margin: 5px;*/
+    /*padding: 2px;*/
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 5px;
+}
+.address, .payment, .total-items {
+    background-color: #f9fafb;
+    margin-bottom: 5px;
+
+    /*border-right: 4px solid #3b82f6;*/
+
+}
+.purchase-header {
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 20px;
+}
+
+.purchase-header h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: #111827;
+}
+.purchase-details{
+    border-left: 4px solid #3b82f6;
+    padding: 5px;
+    margin: 10px 0;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.details {
+    font-size: 14px;
+    color: #4b5563;
+    margin-bottom: 2px;
+}
+.status-badge {
+    display: inline-block;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-weight: 600;
+    margin-top: 6px;
+}
+
+.status-placed         { border-color: #3b82f6; } /* blue */
+.status-confirmed      { border-color: #2563eb; }
+.status-packaging      { border-color: #f59e0b; }
+.status-packaging-complete { border-color: #edcf08; }
+.status-out-for-delivery   { border-color: #6304c2; }
+.status-cancelled      { border-color: #ef4444; }
+.status-payment-pending   { border-color: #21cd07; }
+.status-payment-success   { border-color: #22c55e; }
+
+.status-placed .status-badge         { background: #3b82f6; color: white; }
+.status-confirmed .status-badge      { background: #2563eb; color: white; }
+.status-packaging .status-badge      { background: #f59e0b; color: white; }
+.status-packaging-complete .status-badge { background: #10b981; color: white; }
+.status-out-for-delivery .status-badge   { background: #0ea5e9; color: white; }
+.status-cancelled .status-badge      { background: #ef4444; color: white; }
+.status-payment-pending .status-badge   { background: #f97316; color: white; }
+.status-payment-success .status-badge   { background: #22c55e; color: white; }
