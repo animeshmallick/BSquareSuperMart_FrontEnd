@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(cartResponse => {
             updateProductsContainerInCart(cartResponse);
+            Alpine.initTree(document.querySelector('.bill-section-wrapper'));
             updateBillDetailsInCart(cartResponse);
             updateDeliveryInfo(cartResponse);
         })

@@ -13,72 +13,133 @@ $api = (new ApiBuilder())->init()
     ->setPath("/getPurchaseDoc/".$pid)
     ->setHeaders(["x-authorization" => "Bearer " . $_SESSION['authToken']])
     ->execute();
-if(!isset($api->getResponse()->purchase_id) || $api->getResponse()->purchase_id != $pid) {
-    echo "Invalid Purchase ID";
-}
 $response = $api->getResponse();
-function getStatusThemeClass($status): string
-{
-    $themes = [
-        "PLACED" => "status-placed",
-        "CONFIRMED" => "status-confirmed",
-        "PACKAGING_IN_PROGRESS" => "status-packaging",
-        "PACKAGING_COMPLETED" => "status-packaging-complete",
-        "OUT_FOR_DELIVERY" => "status-out-for-delivery",
-        "CANCELLED" => "status-cancelled",
-        "DELIVERED_WITH_PAYMENT_PENDING" => "status-payment-pending",
-        "DELIVERED_WITH_PAYMENT_SUCCESS" => "status-payment-success"
-    ];
-    return $themes[$status] ?? "status-default";
+
+if(!isset($response->purchase_id) || $response->purchase_id != $pid) {
+    echo "Invalid Purchase ID";
+    exit;
 }
 
-$statusClass = getStatusThemeClass($response->status);
+// Theming based on status
+function getStatusThemeData($status): array {
+    $themes = [
+        "PLACED" => [
+            "emoji" => "📦",
+            "color" => "yellow-500",
+            "text" => "Your order has been placed!",
+            "bg" => "from-yellow-50 via-white to-yellow-100"
+        ],
+        "CONFIRMED" => [
+            "emoji" => "✅",
+            "color" => "blue-500",
+            "text" => "Order confirmed!",
+            "bg" => "from-blue-50 via-white to-blue-100"
+        ],
+        "PACKAGING_IN_PROGRESS" => [
+            "emoji" => "📦",
+            "color" => "indigo-500",
+            "text" => "Your items are being packed!",
+            "bg" => "from-indigo-50 via-white to-indigo-100"
+        ],
+        "OUT_FOR_DELIVERY" => [
+            "emoji" => "🚚",
+            "color" => "teal-500",
+            "text" => "Your order is on the way!",
+            "bg" => "from-teal-50 via-white to-teal-100"
+        ],
+        "DELIVERED_WITH_PAYMENT_SUCCESS" => [
+            "emoji" => "🎉",
+            "color" => "green-600",
+            "text" => "Delivered successfully!",
+            "bg" => "from-green-50 via-white to-green-100"
+        ],
+        "DELIVERED_WITH_PAYMENT_PENDING" => [
+            "emoji" => "⚠️",
+            "color" => "orange-500",
+            "text" => "Delivered — Payment Pending!",
+            "bg" => "from-orange-50 via-white to-orange-100"
+        ],
+        "CANCELLED" => [
+            "emoji" => "❌",
+            "color" => "red-500",
+            "text" => "Order Cancelled",
+            "bg" => "from-red-50 via-white to-red-100"
+        ]
+    ];
+    return $themes[$status] ?? [
+        "emoji" => "📄",
+        "color" => "gray-500",
+        "text" => "Purchase Summary",
+        "bg" => "from-gray-50 via-white to-gray-100"
+    ];
+}
+$theme = getStatusThemeData($response->status);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Purchase Summary</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <title>Order Summary - Thank You</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 </head>
-<body>
+<body class="bg-gradient-to-br <?= $theme['bg'] ?> min-h-screen font-sans text-gray-900">
+<div class="max-w-6xl mx-auto px-6 py-10 space-y-10">
+    <!-- Header Section -->
+    <div class="text-center" data-aos="fade-down">
+        <div class="text-6xl mb-2 text-<?= $theme['color'] ?>"><?= $theme['emoji'] ?></div>
+        <h1 class="text-4xl font-extrabold text-<?= $theme['color'] ?>"><?= $theme['text'] ?></h1>
+        <p class="mt-2 text-lg">Purchase ID:
+            <span class="font-mono bg-<?= $theme['color'] ?>/10 text-<?= $theme['color'] ?> px-2 py-1 rounded">
+          <?= htmlspecialchars($response->purchase_id) ?>
+        </span>
+        </p>
+        <p class="mt-1 text-sm text-gray-600">Placed on: <?= date("d M Y, h:i A", strtotime($response->purchased_at)) ?></p>
+        <p class="mt-2 font-semibold text-<?= $theme['color'] ?>">Status: <?= htmlspecialchars(str_replace('_', ' ', $response->status)) ?></p>
+    </div>
 
-<div class="purchase-container <?= $statusClass ?>">
-    <div class="header">
-        <h2>Purchase ID: </h2><h4><?= htmlspecialchars($response->purchase_id) ?></h4>
-        <div class="details">
-            Status: <span class="status-badge"><?= htmlspecialchars($response->status) ?></span>
+    <!-- Address & Payment Info -->
+    <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+        <div class="bg-white rounded-xl shadow-lg p-5 border-l-4 border-blue-500">
+            <h2 class="text-xl font-semibold text-blue-700 mb-2">📍 Delivery Address</h2>
+            <p><?= htmlspecialchars($response->address->address_line_1) ?><br><?= htmlspecialchars($response->address->address_line_2) ?></p>
         </div>
-        <div class="details">Purchased On: <?= date("d M Y, h:i A", strtotime($response->purchased_at)) ?></div>
+        <div class="bg-white rounded-xl shadow-lg p-5 border-l-4 border-purple-500">
+            <h2 class="text-xl font-semibold text-purple-700 mb-2">💳 Payment Method</h2>
+            <p><?= htmlspecialchars($response->payment->payment) ?></p>
+        </div>
     </div>
 
-    <div class="address">
-        <strong>Delivery Address:</strong><br>
-        <?= htmlspecialchars($response->address->address_line_1) ?><br>
-        <?= htmlspecialchars($response->address->address_line_2) ?>
-    </div>
-
-    <div class="payment">
-        <strong>Payment Method:</strong> <?= htmlspecialchars($response->payment->payment) ?>
-    </div>
-
-    <h3 style="margin-top:30px; margin-bottom:15px;">Items Ordered</h3>
-    <div class="products-grid">
-        <?php foreach ($response->orders as $order):
-            $product = $order->product; ?>
-            <div class="product-card">
-                <img src="<?= htmlspecialchars($product->image_url) ?>" alt="<?= htmlspecialchars($product->name) ?>">
-                <div class="product-content">
-                    <h4><?= htmlspecialchars($product->name) ?></h4>
-                    <p><?= htmlspecialchars($product->brand) ?> • <?= htmlspecialchars($product->size) ?></p>
-                    <div class="price">₹<?= htmlspecialchars($product->selling_price) ?>
-                        <span class="mrp">₹<?= htmlspecialchars($product->mrp) ?></span>
+    <!-- Products -->
+    <div>
+        <h3 class="text-2xl font-bold text-blue-700 mb-4" data-aos="fade-right">🛍 Items Ordered</h3>
+        <div class="grid md:grid-cols-3 gap-6" data-aos="zoom-in-up">
+            <?php foreach ($response->orders as $order):
+                $product = $order->product; ?>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-transform transform hover:scale-105">
+                    <div style="display: flex">
+                        <div>
+                            <img src="<?= htmlspecialchars($product->image_url) ?>" alt="<?= htmlspecialchars($product->name) ?>" class="w-full object-contain bg-gray-100 p-2">
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-semibold text-lg"><?= htmlspecialchars($product->name) ?></h4>
+                            <p class="text-sm text-gray-500"><?= htmlspecialchars($product->brand) ?> • <?= htmlspecialchars($product->size) ?></p>
+                            <div class="mt-2 text-blue-600 font-bold text-xl">
+                                ₹<?= htmlspecialchars($product->selling_price) ?>
+                                <span class="text-sm text-gray-400 line-through ml-2">₹<?= htmlspecialchars($product->mrp) ?></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
     </div>
 </div>
+
+<script>
+    AOS.init();
+</script>
 </body>
 </html>

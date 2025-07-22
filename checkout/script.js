@@ -11,6 +11,7 @@ fetch(BACKEND_URI + "/cart", {
     })
     .then(cartResponse => {
         updateProductsContainerInCart(cartResponse);
+        Alpine.initTree(document.querySelector('.bill-section-wrapper'));
         updateBillDetailsInCart(cartResponse);
     })
     .catch(err => console.log(err));
