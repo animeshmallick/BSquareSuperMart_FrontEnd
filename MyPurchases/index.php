@@ -2,9 +2,7 @@
 session_start();
 include "../Common.php";
 $common = new Common();
-
 if(!$common->is_user_logged_in($_SESSION['authToken'] ?? null)){
-
     header("Location: ../login/index.php?redirect=MyPurchases");
     exit();
 }
@@ -59,21 +57,14 @@ if($orders){
             <div class="address-payment">
                 <div class="address">
                     <strong>Delivery Address:</strong><br>
-                    <?= htmlspecialchars($order->address) ?>
+                    <?= htmlspecialchars($order->address->address_line1) ?><br>
+                    <?= htmlspecialchars($order->address->address_line2) ?>
                 </div>
                 <div class="payment">
-                    <strong>Payment Method:</strong><br> <?= htmlspecialchars($order->payment) ?>
+                    <strong>Payment Method:</strong><br> <?= htmlspecialchars($order->payment->payment) ?>
                 </div>
             </div>
             </div>
-
-<!--            <div class="purchase-info">-->
-<!--                <div>--><?php //= htmlspecialchars($order->purchase_id) ?><!--</div>-->
-<!--                <div>--><?php //= htmlspecialchars($order->status) ?><!--</div>-->
-<!--                <div>--><?php //= htmlspecialchars($order->address_id) ?><!--</div>-->
-<!--                <div>--><?php //= htmlspecialchars($order->payment_id) ?><!--</div>-->
-<!--                <div>--><?php //=htmlspecialchars($order->total_quantity) ?><!--</div>-->
-<!--            </div>-->
         </div>
     <?php }?>
 </div>
