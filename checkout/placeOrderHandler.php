@@ -4,10 +4,8 @@ include '../Common.php';
 $common = new Common();
 $isLoggedIn = $common->is_user_logged_in($_SESSION['authToken'] ?? null);
 if($isLoggedIn) {
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["cart"]) &&
-        isset($_SESSION["purchase_doc"]) && isset($_SESSION["purchase_doc"]->PID) &&
-        isset($_SESSION["purchase_doc"]->selectedAddress) && isset($_SESSION["purchase_doc"]->selectedPayment)) {
-            $cart = $_POST["cart"];
+    if (isset($_SESSION["purchase_doc"]->selectedAddress) && isset($_SESSION["purchase_doc"]->selectedPayment) && isset($_SESSION["purchase_doc"]->PID) && isset($_POST["cart"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
+            $cart = json_decode($_POST["cart"], true);
             $purchaseID = $_SESSION['purchase_doc']->PID;
             $address = $_SESSION['purchase_doc']->selectedAddress;
             $payment = $_SESSION['purchase_doc']->selectedPayment;
