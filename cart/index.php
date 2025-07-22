@@ -2,7 +2,7 @@
 session_start();
 include "../Common.php";
 $common = new Common();
-$isLoggedIn = $common->is_user_logged_in($_SESSION['authToken'] ?? null)
+$isLoggedIn = $common->is_user_logged_in($_SESSION['authToken'] ?? null);
 ?>
 <!DOCTYPE html>
 <html lang="en">
