@@ -325,7 +325,6 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
 
         <script src="../scripts.js"></script>
         <script src="script.js" defer></script>
-        <script src="../Config.js"></script>
         <script>
             AOS.init();
 

@@ -27,11 +27,21 @@ function decrementProductInCart(productID){
 
 //Validate purchase ID and redirect to either thankyou page or order failed page
 function placeOrderHandler(){
-    const form = document.querySelector("form");
-    const cartInput = document.createElement("input");
-    cartInput.type = "hidden";
-    cartInput.name = "cart";
-    cartInput.value = JSON.stringify(JSON.parse(localStorage.getItem('cart')));
-    form.appendChild(cartInput);
-    form.submit();
+    const formData = new URLSearchParams();
+    formData.append('cart', localStorage.getItem('cart'));
+    fetch('placeOrderHandler.php', {
+            method: "POST",
+            headers: {"Content-Type": "application/x-www-form-urlencoded"},
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === 'Order Placed Success'){
+                localStorage.removeItem('cart');
+                window.location.href = `../thankyou/index.php?PID=${data.PID}`;
+            }else{
+                window.location.href = "../orderFailed";
+            }
+        })
+        .catch(err => console.log(err));
 }
