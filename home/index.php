@@ -22,40 +22,110 @@ $all_categories = $api->getResponse();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0/dist/fuse.min.js"></script>
-    <script src="../Config.js"></script>
-    <script src="../components/headerScript.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="../scripts.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .category-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #222;
+            border-left: 5px solid #32CD32;
+            padding-left: 10px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+        }
+
+        .category-img {
+            width: 100%;
+            max-width: 120px;
+            height: auto;
+            margin: 0 auto 10px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .category-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #444;
+            margin-top: 0.5rem;
+        }
+
+        .animated-inline-banner {
+            overflow: hidden;
+            margin-top: 10px;
+            border-radius: 16px;
+        }
+
+        .animated-inline-banner img {
+            width: 100%;
+            border-radius: 16px;
+            animation: pulse infinite 6s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+    </style>
 </head>
+
 <body>
+<div id="page_header"><?php include '../components/header.php'; ?></div>
 
-<div id="page_header"></div>
 <!-- Banner -->
-<div style="max-height: 25%" class="container animated-inline-banner">
-    <img src="../images/animated_grocery_banner.gif" alt="Animated Grocery and Kitchen Banner"/>
+<div class="container animated-inline-banner my-4" data-aos="fade-in">
+    <img src="../images/animated_grocery_banner.gif" alt="Animated Grocery and Kitchen Banner" />
 </div>
 
-<?php
-foreach ($all_categories as $category => $value) { ?>
-    <div class="container mt-5">
-    <h5 class="category-title" data-aos="fade-right"><?= $category ?></h5>
-    <div class="row g-3">
-        <?php foreach ($value as $product) { ?>
-            <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" onclick="window.location.href='../category/index.php?category=<?= $product->category ?>'">
-                <div class="category-card text-center">
-                    <img src="https://via.placeholder.com/150" class="category-img" alt="Grocery">
-                    <div class="category-name"><?= $product->category ?></div>
+<!-- Category Sections -->
+<?php foreach ($all_categories as $category => $products) { ?>
+    <div class="container my-5">
+        <h5 class="category-title" data-aos="fade-right"><?= htmlspecialchars($category) ?></h5>
+        <div class="row g-4">
+            <?php foreach ($products as $product) { ?>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in">
+                    <div class="category-card text-center" onclick="window.location.href='../category/index.php?category=<?= urlencode($product->category) ?>'">
+                        <img src="https://via.placeholder.com/150" class="category-img" alt="<?= htmlspecialchars($product->category) ?>" />
+                        <div class="category-name"><?= htmlspecialchars($product->category) ?></div>
+                    </div>
                 </div>
-            </div>
-        <?php } ?>
+            <?php } ?>
+        </div>
     </div>
-</div>
 <?php } ?>
 
-<div id="page_footer"></div>
+<div id="page_footer"><?php include '../components/footer.html'; ?></div>
+
+<script>
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+</script>
 </body>
 </html>

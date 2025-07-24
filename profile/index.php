@@ -23,6 +23,8 @@ $profile = $api->getResponse();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Profile</title>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0/dist/fuse.min.js"></script>
+    <link href="../styles.css" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -53,9 +55,9 @@ $profile = $api->getResponse();
     </style>
 </head>
 
-<body class="min-h-screen flex items-center justify-center px-4 py-12">
-
-<div class="w-full max-w-md bg-white shadow-2xl rounded-3xl p-8 slide-fade ring-1 ring-gray-200">
+<body>
+<div id="page_header"><?php include '../components/header.php'; ?></div>
+<div class="w-full max-w-md bg-white shadow-2xl rounded-3xl p-8 slide-fade ring-1 ring-gray-200 mt-6">
     <div class="text-center mb-6">
         <h2 class="text-3xl font-bold text-gray-800 mb-2 animate-pulse">👤 Welcome !!</h2>
         <p class="text-sm text-gray-500">Manage your profile, orders, and settings</p>
@@ -88,6 +90,6 @@ $profile = $api->getResponse();
         </a>
     </div>
 </div>
-
+<div id="page_footer"><?php include '../components/footer.html'; ?></div>
 </body>
 </html>

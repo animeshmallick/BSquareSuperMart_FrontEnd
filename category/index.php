@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="../home/style.css">
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0/dist/fuse.min.js"></script>
-    <script src="../components/headerScript.js"></script>
+    <link href="../styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div id="page_header"></div>
+<div id="page_header"><?php include '../components/header.php'; ?></div>
 <div class="wrapper">
     <div class="category_header">Category : <span id="categoryHeader"></span></div>
     <div style="display: flex" class="content">
@@ -39,27 +39,7 @@
         <iframe id="modal-iframe" width="100%" height="500px" frameborder="0"></iframe>
     </div>
 </div>
-<div id="page_footer"></div>
-<script>
-    //AOS.init()
-    fetch('../components/header.php')
-        .then(res => res.text())
-        .then(data => {
-            document.getElementById('page_header').innerHTML = data
-            document.getElementById('hamburgerToggle').addEventListener('click', () => {
-                document.getElementById('sideNav').classList.add('active');
-            });
-            document.getElementById('closeNav').addEventListener('click', () => {
-                document.getElementById('sideNav').classList.remove('active');
-            });
-        })
-        .catch(err => console.log(err));
-
-    fetch('../components/footer.html')
-        .then(res => res.text())
-        .then(data => document.getElementById('page_footer').innerHTML = data)
-        .catch(err => console.log(err));
-</script>
+<div id="page_footer"><?php include '../components/footer.html'; ?></div>
 <script src="../Config.js"></script>
 <script src="script.js"></script>
 <script src="../scripts.js"></script>

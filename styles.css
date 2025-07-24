@@ -1,3 +1,13 @@
+:root {
+    --primary-color: #4f46e5;
+    --accent-color: #22c55e;
+    --bg-color: #f9fafb;
+    --side-gradient: linear-gradient(135deg, #4f46e5, #22c55e);
+    --footer-bg: #1f2937;
+}
+body {
+    min-height: 100vh;
+}
 .cart-bar {
     position: fixed;
     bottom: 0;

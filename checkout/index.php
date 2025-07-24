@@ -8,7 +8,7 @@ $purchaseDoc = $_SESSION['purchase_doc'] ?? null;
 $selectedAddress = $purchaseDoc->selectedAddress ?? null;
 $selectedPayment = $purchaseDoc->selectedPayment ?? null;
 
-if(!isset($_SESSION['purchase_doc'])) {
+if(!isset($_SESSION['purchase_doc']) || !isset($_SESSION['purchase_doc']->PID)) {
     $purchaseDoc = new stdClass();
     $api = (new ApiBuilder())
         ->init()
@@ -24,15 +24,13 @@ if(!isset($_SESSION['purchase_doc'])) {
     $_SESSION['purchase_doc'] = $purchaseDoc;
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['address']) || isset($_POST['payment'])) && $isLoggedIn) {
+    $purchaseDoc = $_SESSION['purchase_doc'];
     if(isset($_POST['address'])){
-        $purchaseDoc = $_SESSION['purchase_doc'];
         $purchaseDoc->selectedAddress = json_decode($_POST['address']);
-        $_SESSION['purchase_doc'] = $purchaseDoc;
     }else{
-        $purchaseDoc = $_SESSION['purchase_doc'];
         $purchaseDoc->selectedPayment = json_decode($_POST['payment']);
-        $_SESSION['purchase_doc'] = $purchaseDoc;
     }
+    $_SESSION['purchase_doc'] = $purchaseDoc;
     // Redirect back to this page with GET to avoid form resubmission on refresh
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
@@ -59,6 +57,8 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
             <script src="https://cdn.tailwindcss.com"></script>
             <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
             <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0/dist/fuse.min.js"></script>
+            <link href="../styles.css" rel="stylesheet" type="text/css">
             <style>
                 .radio-card input[type="radio"]:checked + .content {
                     border-color: #2563eb;
@@ -94,6 +94,7 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
             </style>
         </head>
         <body class="bg-gradient-to-br from-sky-100 via-white to-blue-50 min-h-screen font-sans text-gray-900">
+        <div id="page_header"><?php include '../components/header.php'; ?></div>
         <div class="max-w-4xl mx-auto px-6 py-10">
             <div class="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl shadow-2xl p-8" data-aos="fade-up" data-aos-duration="900">
                 <h2 class="text-4xl font-bold text-blue-700 mb-8 tracking-tight" data-aos="fade-down">🚚 Step 1: Choose Delivery Address</h2>
@@ -135,6 +136,7 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
                 });
             });
         </script>
+        <div id="page_footer"><?php include '../components/footer.html'; ?></div>
         </body>
         </html>
 
@@ -157,6 +159,8 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
             <script src="https://cdn.tailwindcss.com"></script>
             <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
             <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+            <link href="../styles.css" rel="stylesheet" type="text/css">
+            <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0/dist/fuse.min.js"></script>
             <style>
                 .radio-card input[type="radio"]:checked + .content {
                     border-color: #2563eb;
@@ -192,6 +196,7 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
             </style>
         </head>
         <body class="bg-gradient-to-br from-blue-50 via-white to-sky-100 min-h-screen font-sans text-gray-900">
+        <div id="page_header"><?php include '../components/header.php'; ?></div>
         <div class="max-w-4xl mx-auto px-6 py-10">
             <div class="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl shadow-2xl p-8" data-aos="fade-up" data-aos-duration="900">
                 <h2 class="text-4xl font-bold text-blue-700 mb-8 tracking-tight" data-aos="fade-down">💳 Step 2: Choose Payment Method</h2>
@@ -236,6 +241,7 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
                 });
             });
         </script>
+        <div id="page_footer"><?php include '../components/footer.html'; ?></div>
         </body>
         </html>
 
@@ -250,6 +256,8 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
             <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
             <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
             <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0/dist/fuse.min.js"></script>
+            <link href="../styles.css" rel="stylesheet" type="text/css">
             <style>
                 .ripple::after {
                     content: "";
@@ -270,6 +278,7 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
             </style>
         </head>
         <body class="bg-gradient-to-br from-blue-50 via-white to-sky-100 min-h-screen text-gray-900 font-sans">
+        <div id="page_header"><?php include '../components/header.php'; ?></div>
         <div class="max-w-6xl mx-auto px-6 py-10 space-y-8">
             <!-- Cart Items & Bill Section -->
             <div class="grid md:grid-cols-3 gap-6" data-aos="fade-up">
@@ -332,6 +341,7 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
                 });
             });
         </script>
+        <div id="page_footer"><?php include '../components/footer.html'; ?></div>
         </body>
         </html>
 

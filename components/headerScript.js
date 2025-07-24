@@ -62,11 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(err => console.log(err));
 
-    fetch('../components/footer.html')
-        .then(res => res.text())
-        .then(data => document.getElementById('page_footer').innerHTML = data)
-        .catch(err => console.log(err));
-
 
     document.addEventListener("click", (e) => {
         if (!searchBox.contains(e.target) && !searchDropdown.contains(e.target)) {

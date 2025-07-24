@@ -84,8 +84,11 @@ $theme = getStatusThemeData($response->status);
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0/dist/fuse.min.js"></script>
+    <link href="../styles.css" rel="stylesheet">
 </head>
 <body class="bg-gradient-to-br <?= $theme['bg'] ?> min-h-screen font-sans text-gray-900">
+<div id="page_header"><?php include '../components/header.php'; ?></div>
 <div class="max-w-6xl mx-auto px-6 py-10 space-y-10">
     <!-- Header Section -->
     <div class="text-center" data-aos="fade-down">
@@ -141,5 +144,6 @@ $theme = getStatusThemeData($response->status);
 <script>
     AOS.init();
 </script>
+<div id="page_footer"><?php include '../components/footer.html'; ?></div>
 </body>
 </html>
