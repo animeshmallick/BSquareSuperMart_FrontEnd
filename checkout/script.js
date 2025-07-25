@@ -40,7 +40,7 @@ function placeOrderHandler(){
                 localStorage.removeItem('cart');
                 window.location.href = `../thankyou/index.php?PID=${data.PID}`;
             }else{
-                window.location.href = "../orderFailed";
+                window.location.href = "../orderFailed/";
             }
         })
         .catch(err => console.log(err));

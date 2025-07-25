@@ -10,7 +10,7 @@
 <header class="sticky top-0 z-50 shadow-md">
     <!-- Top Header -->
     <div class="bg-gradient-to-r from-lime-500 to-emerald-500 text-white">
-        <div class="flex items-center justify-between px-4 md:px-10 py-4">
+        <div class="flex items-center justify-between px-2 md:px-8 py-2">
             <!-- Logo + Brand -->
             <div onclick="window.location.href='../home/'" class="flex items-center gap-3 text-2xl font-extrabold tracking-wide animate-fade-in">
                 <img src="../components/logo.png" alt="Logo" class="w-10 h-10 rounded-full shadow-md" />
@@ -41,11 +41,11 @@
     </div>
 
     <!-- Search Bar -->
-    <div class="relative px-4 py-3 bg-white shadow-inner animate-fade-in-down">
+    <div class="relative px-2 py-2 bg-white shadow-inner animate-fade-in-down">
         <input
                 type="text"
                 placeholder="🔍 Search for products..."
-                class="search-bar w-full px-5 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-lime-400 shadow transition-all duration-300"
+                class="search-bar w-full px-2 py-1 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-lime-400 shadow transition-all duration-300"
         />
         <!-- Search Results -->
         <div
