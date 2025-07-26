@@ -104,7 +104,7 @@ $all_categories = $api->getResponse();
 
 <!-- Category Sections -->
 <?php foreach ($all_categories as $category => $products) { ?>
-    <div class="container my-5">
+    <div class="category container my-5">
         <h5 class="category-title" data-aos="fade-right"><?= htmlspecialchars($category) ?></h5>
         <div class="row g-4">
             <?php foreach ($products as $product) { ?>
