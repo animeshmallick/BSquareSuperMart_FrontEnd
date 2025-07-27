@@ -31,7 +31,12 @@ if($isLoggedIn) {
             echo json_encode(['error' => 'Order Placing Failed. Try Again']);
         }
     }else{
-        echo json_encode(['error' => 'Invalid params to place order']);
+        echo json_encode(['error' => 'Invalid params to place order',
+                          'address_set' => $_SESSION["purchase_doc"]->selectedAddress ?? null,
+                          'payment_set' => $_SESSION["purchase_doc"]->selectedPayment ?? null,
+                          'PID set' => $_SESSION["purchase_doc"]->PID ?? null,
+                          'Cart set' => $_POST["cart"] ?? null,
+                          'Method' => $_SERVER["REQUEST_METHOD"]]);
         ?>
         <script>
             console.log("Address Set : " + <?= isset($_SESSION["purchase_doc"]->selectedAddress)?>);
