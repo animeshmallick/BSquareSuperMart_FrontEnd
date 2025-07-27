@@ -1,3 +1,13 @@
+<script>
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    if (!Array.isArray(cart) || cart.length === 0) {
+        window.location.href = "../cart/";
+    }
+    cart.forEach(item => {
+        if (!item.hasOwnProperty("ProductID") || !item.hasOwnProperty("Quantity"))
+            window.location.href = "../cart/";
+    });
+</script>
 <?php
 session_start();
 include "../Common.php";
