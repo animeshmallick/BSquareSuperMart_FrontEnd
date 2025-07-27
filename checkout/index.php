@@ -327,6 +327,15 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
                 </form>
             </div>
         </div>
+        <div id="debug">
+            <span>Address: <?= json_encode($selectedAddress) ?></span>
+            <span>Payment: <?= json_encode($selectedPayment) ?></span>
+            <span>Auth  Token: <?= $_SESSION['authToken'] ?></span>
+            <span>Cart : <span id="cart-debug"></span></span>
+            <script>
+                document.getElementById("cart-debug").innerHTML = JSON.stringify(cart);
+            </script>
+        </div>
 
         <script src="../scripts.js"></script>
         <script src="script.js" defer></script>

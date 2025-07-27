@@ -32,6 +32,15 @@ if($isLoggedIn) {
         }
     }else{
         echo json_encode(['error' => 'Invalid params to place order']);
+        ?>
+        <script>
+            console.log("Address Set : " + <?= isset($_SESSION["purchase_doc"]->selectedAddress)?>);
+            console.log("Payment Set : " + <?= isset($_SESSION["purchase_doc"]->selectedPayment)?>);
+            console.log("PID Set : " + <?= isset($_SESSION["purchase_doc"]->PID)?>);
+            console.log("PID Set : " + <?= isset($_POST["cart"])?>);
+            console.log("Request Method : " + <?= $_SERVER["REQUEST_METHOD"]?>)
+        </script>
+        <?php
     }
 }else{
     echo json_encode(['error' => 'Not Authorized to Place Order']);
