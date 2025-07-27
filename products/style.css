@@ -1,0 +1,73 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.product-image {
+    max-height: 380px;
+    object-fit: contain;
+    border-radius: 12px;
+    transition: transform 0.4s ease;
+}
+.product-image:hover {
+    transform: scale(1.03);
+}
+
+.product-pricing div {
+    margin-bottom: 4px;
+}
+
+.addProduct button {
+    background-color: #22c55e;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.addProduct button:hover {
+    background-color: #16a34a;
+    transform: scale(1.05);
+}
+
+/* Similar Product Card */
+.product-outer-container {
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 1rem;
+    background: #fff;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+.product-outer-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.product-outer-container img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    border-radius: 12px;
+}
+
+/* Styles for "About the Product" section - new addition */
+.product-description {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+    margin-top: 2.5rem; /* Adjusted margin for better spacing */
+}
+
+.product-description h4 {
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 1.5rem; /* More space below heading */
+}
