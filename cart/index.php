@@ -17,19 +17,25 @@ $isLoggedIn = $common->is_user_logged_in($_SESSION['authToken'] ?? null);
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="script.js"></script>
     <script src="../scripts.js"></script>
-    <link href="../styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="page_header"><?php include '../components/header.php'; ?></div>
+
 <div class="cart-container">
     <div class="cart-header">My Cart</div>
     <div class="delivery-info-box"></div>
     <div id="cart_items_container"></div>
     <div class="bill-section-wrapper full-width-bill-box"></div>
-    <div class="policy-box">
-        <div class="address-title">Cancellation Policy</div>
-        Orders cannot be cancelled once packed for delivery. In case of unexpected delays, a refund will be provided, if applicable.
-    </div>
+
+    <details class="policy-details-box">
+        <summary class="policy-summary-header">
+            <span class="address-title">Cancellation Policy</span>
+            <span class="policy-arrow"></span> </summary>
+        <div class="policy-content">
+            Orders cannot be cancelled once packed for delivery. In case of unexpected delays, a refund will be provided, if applicable.
+        </div>
+    </details>
+
     <?php if ($isLoggedIn) { ?>
         <div class="pay-summary-box summary-combined-box">
             <div class="half-box grand-total">Grand Total: ₹</div>
@@ -42,6 +48,7 @@ $isLoggedIn = $common->is_user_logged_in($_SESSION['authToken'] ?? null);
         </div>
     <?php } ?>
 </div>
+
 <div id="page_footer"><?php include '../components/footer.html'; ?></div>
 </body>
 </html>

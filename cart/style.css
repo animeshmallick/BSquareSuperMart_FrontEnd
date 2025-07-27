@@ -1,10 +1,11 @@
 html, body {
-    height: 100%;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
     background-color: #f5f5f5;
-    overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .cart-container {
@@ -13,7 +14,10 @@ html, body {
     overflow: auto;
     width: 100%;
     box-sizing: border-box;
+    flex-grow: 1; /* Allows cart content to take available space */
+    position: relative; /* Needed for absolute positioning of empty message */
 }
+
 .cart-header {
     margin: 0.5rem;
     background-color: #ffd700;
@@ -22,6 +26,7 @@ html, body {
     font-weight: bold;
     border-radius: 0.75rem;
     text-align: center;
+    padding: 0.5rem 1rem; /* Added padding for better appearance */
 }
 
 .item-box {
@@ -65,8 +70,8 @@ html, body {
 
 .delivery-info-box {
     background: linear-gradient(to right, #ffd700, #fff8dc);
-    margin: 0.25rem 1rem;
-    padding: 0.25rem;
+    margin: 0.25rem 0.5rem; /* Adjusted margin for consistency */
+    padding: 0.75rem 1rem; /* Added padding */
     border-radius: 12px;
     font-weight: 600;
     text-align: center;
@@ -75,7 +80,7 @@ html, body {
 .bill-section-wrapper {
     background: white;
     padding: 16px;
-    margin: 12px 0;
+    margin: 0.5rem; /* Adjusted margin for consistency */
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
@@ -109,12 +114,56 @@ html, body {
     border-radius: 10px;
 }
 
-.policy-box {
-    background: #fff8dc;
-    padding: 16px;
-    margin: 12px 0;
+/* Styles for the expandable Cancellation Policy box */
+.policy-details-box {
+    background: white; /* Changed to white for consistency with other sections */
+    padding: 0; /* Remove padding from details itself, add to content */
+    margin: 0.5rem; /* Adjusted margin for consistency */
     border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden; /* Ensures content respects border-radius on collapse */
+    transition: all 0.3s ease; /* Smooth transition for expand/collapse */
 }
+
+.policy-summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px; /* Padding for the header area */
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #f8f9fa; /* Slightly different background for header */
+    border-bottom: 1px solid #eee; /* Separator for collapsed state */
+    user-select: none; /* Prevent text selection on click */
+}
+
+.policy-details-box[open] .policy-summary-header {
+    border-bottom: 1px solid #ddd; /* Darker border when open */
+}
+
+/* Style for the arrow icon */
+.policy-arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333; /* Down arrow */
+    transition: transform 0.3s ease;
+    margin-left: 10px; /* Space between title and arrow */
+}
+
+.policy-details-box[open] .policy-arrow {
+    transform: rotate(180deg); /* Up arrow when open */
+}
+
+/* Style for the content inside the expandable section */
+.policy-content {
+    padding: 16px; /* Padding for the actual policy text */
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+}
+
 
 .address-info-box {
     background: linear-gradient(to right, #ffd700, #fff8dc);
@@ -138,7 +187,7 @@ html, body {
     padding: 16px;
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    margin-top: 20px;
+    margin: 0.5rem; /* Adjusted margin for consistency */
 }
 
 .summary-combined-box {
@@ -158,6 +207,7 @@ html, body {
 .grand-total {
     background: linear-gradient(to right, #ffd700, #fff8dc);
     color: black;
+    margin-right: 8px; /* Space between total and button */
 }
 
 .pay-btn, .login-btn {
@@ -172,6 +222,7 @@ html, body {
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    margin-left: 8px; /* Space between total and button */
 }
 
 .modern-btn, .modern-btn-link {
@@ -183,4 +234,65 @@ html, body {
 
 .modern-btn:hover, .modern-btn-link:hover {
     background-color: #218838;
+}
+
+/* 📦 Empty Cart Message Styling */
+.empty-cart-message {
+    position: absolute; /* Position absolutely within cart-container */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for exact centering */
+    width: 80%; /* Take up most of the width */
+    max-width: 400px; /* Max width for larger screens */
+    text-align: center;
+    padding: 40px;
+    background-color: #ffffff; /* White background */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
+    font-size: 1.8rem; /* Bigger font size for main message */
+    font-weight: bold;
+    color: #333; /* Darker text */
+    animation: fadeInScale 0.8s ease-out forwards; /* Animation for a modern feel */
+}
+
+.empty-cart-emoji {
+    font-size: 4rem; /* Even bigger emoji */
+    display: block; /* Ensures emoji is on its own line */
+    margin-bottom: 15px; /* Space below emoji */
+    animation: bounceIn 1s ease-out; /* Fun bounce animation for emoji */
+}
+
+.empty-cart-subtext {
+    font-size: 1.1rem; /* Smaller, guiding text */
+    color: #777;
+    margin-top: 10px;
+}
+
+/* Keyframe animations for modern feel */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.1); opacity: 1; }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+/* Footer styles to remove side and bottom space */
+#page_footer {
+    margin-top: auto;
+    background-color: #fff;
+    padding: 0; /* Removed padding */
+    margin: 0; /* Removed margin */
+    width: 100%; /* Ensure it spans full width */
+    text-align: center;
 }

@@ -99,6 +99,14 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
             <div class="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl shadow-2xl p-8" data-aos="fade-up" data-aos-duration="900">
                 <h2 class="text-4xl font-bold text-blue-700 mb-8 tracking-tight" data-aos="fade-down">🚚 Step 1: Choose Delivery Address</h2>
                 <form method="POST" action="../checkout/index.php" class="space-y-6">
+                    <div class="flex flex-wrap justify-between gap-4 mb-8">
+                        <button type="button" onclick="window.location.href='../addAddress/index.php?redirect=checkout'" class="relative px-6 py-2 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-400 text-gray-800 font-semibold rounded-xl shadow transition-all duration-300 overflow-hidden ripple">
+                            ➕ Add New Address
+                        </button>
+                        <button type="submit" class="relative px-8 py-3 bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105 overflow-hidden ripple">
+                            <?= $selectedPayment ? "🧾 Order Summary" : "💳 Proceed to Payment" ?>
+                        </button>
+                    </div>
                     <?php foreach ($userAddresses->userAddress as $index => $address):
                         $isSelected = ($selectedAddress && $selectedAddress->address_id == $address->address_id); ?>
                         <label class="radio-card block" data-aos="zoom-in-up" data-aos-delay="<?= $index * 100 ?>">
@@ -109,14 +117,6 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
                             </div>
                         </label>
                     <?php endforeach; ?>
-                    <div class="flex flex-wrap justify-between gap-4 mt-10">
-                        <button type="button" onclick="window.location.href='../addAddress/index.php?redirect=checkout'" class="relative px-6 py-2 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-400 text-gray-800 font-semibold rounded-xl shadow transition-all duration-300 overflow-hidden ripple">
-                            ➕ Add New Address
-                        </button>
-                        <button type="submit" class="relative px-8 py-3 bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105 overflow-hidden ripple">
-                            <?= $selectedPayment ? "🧾 Order Summary" : "💳 Proceed to Payment" ?>
-                        </button>
-                    </div>
                 </form>
             </div>
         </div>
@@ -280,23 +280,19 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
         <body class="bg-gradient-to-br from-blue-50 via-white to-sky-100 min-h-screen text-gray-900 font-sans">
         <div id="page_header"><?php include '../components/header.php'; ?></div>
         <div class="max-w-6xl mx-auto px-6 py-10 space-y-8">
-            <!-- Cart Items & Bill Section -->
             <div class="grid md:grid-cols-3 gap-6" data-aos="fade-up">
                 <div class="md:col-span-2 bg-white rounded-3xl p-6 shadow-xl">
                     <h2 class="text-2xl font-bold text-blue-700 mb-4">🛒 Your Cart</h2>
                     <div id="cart_items_container" class="space-y-4">
-                        <!-- JS will inject cart items here -->
                     </div>
                 </div>
                 <div class="bg-white rounded-3xl p-6 shadow-xl">
                     <h2 class="text-2xl font-bold text-blue-700 mb-4">💰 Bill Summary</h2>
                     <div class="bill-section-wrapper space-y-2" id="bill_box">
-                        <!-- JS will inject billing here -->
                     </div>
                 </div>
             </div>
 
-            <!-- Address + Payment Summary -->
             <div class="bg-white rounded-3xl p-6 shadow-xl" data-aos="zoom-in-up">
                 <h2 class="text-2xl font-bold text-blue-700 mb-6">📦 Delivery & Payment Info</h2>
                 <div class="grid md:grid-cols-2 gap-6">
@@ -313,7 +309,6 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
                 </div>
             </div>
 
-            <!-- Place Order Button -->
             <div class="text-center" data-aos="fade-up">
                 <form method="POST" action="placeOrderHandler.php">
                     <button onclick="placeOrderHandler();" class="relative px-10 py-4 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 hover:from-blue-700 hover:to-indigo-900 text-white font-bold text-lg rounded-full shadow-xl transition-transform transform hover:scale-105 overflow-hidden ripple">
@@ -349,4 +344,3 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
     header("Location: ../cart/");
     exit;
 } ?>
-
