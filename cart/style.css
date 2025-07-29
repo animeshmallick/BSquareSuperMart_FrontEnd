@@ -19,14 +19,14 @@ html, body {
 }
 
 .cart-header {
-    margin: 0.5rem;
+    margin: 0.1rem;
     background-color: #ffd700;
     color: #000;
     font-size: 1.25rem;
     font-weight: bold;
     border-radius: 0.75rem;
     text-align: center;
-    padding: 0.5rem 1rem; /* Added padding for better appearance */
+    padding: 0.1rem 0.1rem; /* Added padding for better appearance */
 }
 
 .item-box {
@@ -70,8 +70,8 @@ html, body {
 
 .delivery-info-box {
     background: linear-gradient(to right, #ffd700, #fff8dc);
-    margin: 0.25rem 0.5rem; /* Adjusted margin for consistency */
-    padding: 0.75rem 1rem; /* Added padding */
+    margin: 0.1rem 0.1rem; /* Adjusted margin for consistency */
+    padding: 0.1rem 0.1rem; /* Added padding */
     border-radius: 12px;
     font-weight: 600;
     text-align: center;
@@ -79,7 +79,7 @@ html, body {
 
 .bill-section-wrapper {
     background: white;
-    padding: 16px;
+    padding: 12px;
     margin: 0.5rem; /* Adjusted margin for consistency */
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);

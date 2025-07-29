@@ -74,44 +74,43 @@ function updateProductsContainerInCart(cartResponse) {
     }
 
     // Apply modern grid layout
-    productsContainer.className = "grid md:grid-cols-3 gap-6";
+    productsContainer.className = "grid md:grid-cols-3 gap-2";
 
     cartResponse.products.forEach(product => {
         const productContainer = document.createElement("div");
-        productContainer.className = "bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-transform transform hover:scale-105 flex flex-col";
-
+        productContainer.className = "bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-transform transform hover:scale-105 flex flex-col ml-2";
         productContainer.innerHTML = `
-        <div style="display: flex">
-        <div style="width: 30%">
-      <img src="${product.image_url}" alt="${product.name}" class="w-full object-contain bg-gray-100 p-2">
-      </div>
-      <div>
-      <div class="p-4 flex flex-col flex-grow justify-between">
-        <div>
-          <h4 class="font-semibold text-lg text-gray-800">${product.name}</h4>
-          <p class="text-sm text-gray-500 mb-2">${product.size}</p>
-          <div class="text-blue-600 font-bold text-xl">
-            ₹${product.selling_price}
-          </div>
+        <div class="p-1 flex gap-x-8">
+            <div style="width: 30%">
+              <img src="${product.image_url}" alt="${product.name}" class="w-full object-contain bg-gray-100 p-2">
+            </div>
+            <div>
+                 <div class="p-3 flex flex-col flex-grow justify-between">
+                     <div>
+                         <h4 class="font-bold text-l text-gray-800">${product.name}</h4>
+                         <p class="text-sm text-gray-500 mb-2">${product.size}</p>
+                     </div>
+                 </div>
+            </div>
+            <div class="mt-1 flex flex-col items-center justify-center">
+                 <div class="flex items-center gap-2 px-2 py-1 bg-gray-100 rounded-full shadow-inner">
+                    <button
+                     class="w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-700 text-l font-bold transition-all duration-200"
+                     onclick="decrementProductInCart(${product.id})"
+                     aria-label="Decrease Quantity"
+                     >−</button>
+                     <span class="min-w-[18px] text-center text-l font-bold">${product.quantity}</span>
+                     <button
+                     class="w-6 h-6 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-700 text-l font-bold transition-all duration-200"
+                     onclick="incrementProductInCart(${product.id})"
+                     aria-label="Increase Quantity"
+                     >+</button>
+                 </div>
+                 <div class="items-center text-blue-600 font-bold text-l">
+                    ₹${product.selling_price}
+                 </div>
+            </div>
         </div>
-        <div class="mt-4 flex justify-center">
-          <div class="flex items-center gap-4 px-4 py-2 bg-gray-100 rounded-full shadow-inner">
-            <button
-              class="w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-700 text-xl font-bold transition-all duration-200"
-              onclick="decrementProductInCart(${product.id})"
-              aria-label="Decrease Quantity"
-            >−</button>
-            <span class="min-w-[24px] text-center text-lg font-semibold">${product.quantity}</span>
-            <button
-              class="w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-700 text-xl font-bold transition-all duration-200"
-              onclick="incrementProductInCart(${product.id})"
-              aria-label="Increase Quantity"
-            >+</button>
-          </div>
-        </div>
-      </div>
-      </div>
-      </div>
     `;
 
         productsContainer.appendChild(productContainer);
