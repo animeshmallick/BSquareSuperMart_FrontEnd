@@ -328,10 +328,10 @@ if($isLoggedIn && $_SERVER["REQUEST_METHOD"] ==="GET"){
             </div>
         </div>
         <div id="debug">
-            <span>Address: <?= json_encode($selectedAddress) ?></span>
-            <span>Payment: <?= json_encode($selectedPayment) ?></span>
-            <span>Auth  Token: <?= $_SESSION['authToken'] ?></span>
-            <span>Cart : <span id="cart-debug"></span></span>
+            <span>Address: <?= json_encode($selectedAddress) ?><br /></span>
+            <span>Payment: <?= json_encode($selectedPayment) ?><br /></span>
+            <span>Auth  Token: <?= substr($_SESSION['authToken'], 0, 8).'...' ?><br /></span>
+            <span>Cart : <span id="cart-debug"></span><br /></span>
             <script>
                 document.getElementById("cart-debug").innerHTML = JSON.stringify(cart);
             </script>
